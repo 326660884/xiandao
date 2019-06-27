@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="UTF-8">
+   <title>插件目录</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+   <link rel="stylesheet" href="../../lib/layui/css/layui.css">
+   <style>
+      .ok-body {
+         padding: 20px;
+      }
+   </style>
+</head>
+<body>
+<div class="ok-body">
+   <blockquote class="layui-elem-quote">
+      <p>主要描述插件的目录和插件的引入。</p>
+      <p>1.插件目录在项目的/lib/okplugins目录下</p>
+      <p>2.如果你想在内部控制导航，那么你需要引入一个okTab插件</p>
+   </blockquote>
+   <pre lay-title="导航参数">
+引入插件并加载一个插件
+layui.config({
+   base: "/lib/okplugins/"
+}).use(['okTab'], function () {
+   var okTab = layui.okTab();
+   var page = '&lt;div lay-id="add-1" data-url="/pages/user/user.html"&gt;个人中心&lt;/div&gt;';
+   okTab.tabAdd(page);
+});
+   </pre>
+</div>
+</body>
+</html>
+<script src="../../lib/layui/layui.js"></script>
+<script type="text/javascript">
+  layui.config({
+    base: "/lib/okplugins/"
+  }).use(['code'], function () {
+    var code = layui.code;
+    code({
+      elem: 'pre'
+    });
+  });
+</script>
