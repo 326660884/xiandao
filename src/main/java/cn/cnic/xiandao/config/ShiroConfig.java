@@ -6,9 +6,11 @@ import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Properties;
 
 @Configuration
 public class ShiroConfig {
@@ -23,8 +25,8 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setUnauthorizedUrl("/unauthc");
         shiroFilterFactoryBean.setSuccessUrl("/index");
 
-        filterChainDefinitionMap.put("/*", "anon");
 
+        filterChainDefinitionMap.put("/pages/*", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }
@@ -32,8 +34,8 @@ public class ShiroConfig {
     @Bean
     public HashedCredentialsMatcher hashedCredentialsMatcher() {
         HashedCredentialsMatcher hashedCredentialsMatcher = new HashedCredentialsMatcher();
-        hashedCredentialsMatcher.setHashAlgorithmName(PasswordHelper.ALGORITHM_NAME); // 散列算法
-        hashedCredentialsMatcher.setHashIterations(PasswordHelper.HASH_ITERATIONS); // 散列次数
+        hashedCredentialsMatcher.setHashAlgorithmName("md5"); // 散列算法
+        hashedCredentialsMatcher.setHashIterations(2); // 散列次数
         return hashedCredentialsMatcher;
     }
 
@@ -55,6 +57,7 @@ public class ShiroConfig {
 //        配置 2, CacheManager 缓存框架
 //        securityManager.setCacheManager();
         // 3.配置realm
+
         securityManager.setRealm(shiroRealm());
 
         return securityManager;
@@ -64,5 +67,6 @@ public class ShiroConfig {
     public PasswordHelper passwordHelper() {
         return new PasswordHelper();
     }
+
 
 }
