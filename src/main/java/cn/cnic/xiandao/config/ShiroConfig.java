@@ -25,8 +25,9 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setUnauthorizedUrl("/unauthc");
         shiroFilterFactoryBean.setSuccessUrl("/index");
 
-
+        filterChainDefinitionMap.put("/pages/user/*", "roles[xu]");
         filterChainDefinitionMap.put("/pages/*", "authc");
+        filterChainDefinitionMap.put("/leftnav", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }
@@ -41,8 +42,8 @@ public class ShiroConfig {
 
 
     @Bean
-    public EnceladusShiroRealm shiroRealm() {
-        EnceladusShiroRealm shiroRealm = new EnceladusShiroRealm();
+    public MyShiroRealm shiroRealm() {
+        MyShiroRealm shiroRealm = new MyShiroRealm();
         shiroRealm.setCredentialsMatcher(hashedCredentialsMatcher());
         return shiroRealm;
     }

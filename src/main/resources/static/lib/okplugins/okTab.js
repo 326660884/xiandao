@@ -207,6 +207,7 @@ layui.define(["element", "jquery"], function (exports) {
           temp += ('<i class="layui-icon" data-icon="{0}">{1}</i>').format(data.icon, data.icon);
         }
       }
+
       temp += '<cite>' + data.title + '</cite>';
       temp += '<span class="layui-nav-more"></span>';
       temp += '</a>';
@@ -214,11 +215,12 @@ layui.define(["element", "jquery"], function (exports) {
       for (var i = 0; i < data.children.length; i++) {
         temp += '<dd>';
         var lay_id = tabID + "-" + (i + 1);
+        //递归生成
         createMenu(data.children[i], lay_id);
         temp += '</dd>';
       }
       temp += "</dl>";
-    } else {
+    } else { //没有子节点
       var isClose = data.isClose === false ? "false" : "true";
       if (data.target) {
         temp += ('<a lay-id="{0}" data-url="{1}" target="{2}" is-close="{3}">').format(tabID, data.href, data.target, isClose);
@@ -226,6 +228,9 @@ layui.define(["element", "jquery"], function (exports) {
         temp += ('<a lay-id="{0}" data-url="{1}" is-close="{2}">').format(tabID, data.href, isClose);
       }
       if (data.icon != undefined && data.icon != '') {
+        if(data.fontFamily == undefined){
+            data.fontFamily = data.font_Family
+        }
         if (data.fontFamily && data.fontFamily.indexOf("layui-icon") < 0) {
           if (data.icon.indexOf("&#") >= 0) {
             temp += ('<i class="{0}">{1}</i>').format(data.fontFamily, data.icon);
@@ -235,6 +240,9 @@ layui.define(["element", "jquery"], function (exports) {
         } else {
           temp += ('<i class="layui-icon" data-icon="{0}">{1}</i>').format(data.icon, data.icon);
         }
+      }
+      if(data.title == undefined){
+        data.title = data.permission_name;
       }
       temp += ('<cite>{0}</cite></a>').format(data.title);
       return;

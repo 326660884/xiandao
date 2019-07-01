@@ -2,7 +2,7 @@ package cn.cnic.xiandao.controller;
 
 
 import cn.cnic.xiandao.config.PasswordHelper;
-import cn.cnic.xiandao.module.User;
+import cn.cnic.xiandao.module.*;
 import cn.cnic.xiandao.service.UserServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
@@ -13,14 +13,19 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.expression.spel.ast.NullLiteral;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 @Controller
 @Slf4j
@@ -109,5 +114,50 @@ public class LogonController {
 //
 //        return "pages/"+fileName+"/"+entity.replace(".html","");
 //    }
+
+    /**
+     * 获得 左侧菜单
+     * @return
+     */
+    @GetMapping("/leftnav")
+    @ResponseBody
+    public List<?> getNav(){
+        User user=(User)SecurityUtils.getSubject().getPrincipal();
+        List<ISysPermission> iSysPermissions = userService.getNavs(user.getUserName());
+        List<NavsPermission> navList = new ArrayList<>(8);
+        for (ISysPermission p:iSysPermissions) {
+            if(p.getLevel() != 1 || p.getparent_id() != null ) {
+                continue;
+            }
+            NavsPermission nav = new NavsPermission();
+            nav.setTitle(p.getPermission_name());
+            nav.setFontFamily(p.getFont_Family());
+            nav.setIcon(p.getIcon());
+            nav.setHref(p.getHref());
+            nav.setIsClose(p.getIs_close());
+            nav.setSpread(p.getSpread());
+            nav.setIsCheck(p.getIs_Check());
+            nav.setPermissionId(p.getPermission_Id());
+            if(navList.add(nav)){
+                iSysPermissions.remove(p);
+            }
+        }
+        for (int i = 0; i < navList.size(); i++) {
+            for (int j = 0; j < iSysPermissions.size(); j++) {
+                NavsPermission np = navList.get(i);
+                ISysPermission ip = iSysPermissions.get(j);
+                if(np.getPermissionId().equals(ip.getparent_id()) ){
+                    if(navList.get(i).getChildren() == null){
+                        navList.get(i).setChildren(new ArrayList<>());
+                    }
+                    //放入二级菜单
+                    navList.get(i).getChildren().add(iSysPermissions.get(j));
+                }
+            }
+        }
+
+
+        return navList;
+    }
 
 }

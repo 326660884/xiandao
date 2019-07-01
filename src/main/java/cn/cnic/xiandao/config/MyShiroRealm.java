@@ -1,5 +1,7 @@
 package cn.cnic.xiandao.config;
 
+import cn.cnic.xiandao.module.ISysPermission;
+import cn.cnic.xiandao.module.IUserRole;
 import cn.cnic.xiandao.module.User;
 import cn.cnic.xiandao.service.UserServiceImpl;
 import com.fasterxml.jackson.databind.annotation.JsonAppend;
@@ -15,18 +17,29 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.util.ByteSource;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 
 @Slf4j
-public class EnceladusShiroRealm extends AuthorizingRealm {
+public class MyShiroRealm extends AuthorizingRealm {
 
     @Resource
     private UserServiceImpl userService;
 
     @Override
-    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
+    protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-
+        //如果授权部分没有传入User对象，这里只能取到userName
+        //也就是SimpleAuthenticationInfo构造的时候第一个参数传递需要User对象
+        User user = (User) principals.getPrimaryPrincipal();
+        List<IUserRole> roles = userService.findUserRoleByUserName(user.getUserName());
+        for (IUserRole role : roles) {
+            authorizationInfo.addRole(role.getRole());
+        }
+        List<ISysPermission> permissions = userService.findUserRolePermissionByUserName(user.getUserName());
+        for (ISysPermission p : permissions) {
+            authorizationInfo.addStringPermission(p.getPermission());
+        }
         return authorizationInfo;
     }
 

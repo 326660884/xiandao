@@ -10,6 +10,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 
 public interface UserRepository extends JpaRepository<User,Integer> {
@@ -43,14 +44,19 @@ public interface UserRepository extends JpaRepository<User,Integer> {
     void insertUserRole(Integer userId, Integer roleId);
 
     //根据用户名获取用户所具备的角色列表
-    @Query(value="select a.userId,a.userName,c.roleId,c.role,c.description from user a\n" +
-            "inner join sysuserrole b on a.userId = b.userId \n" +
-            "inner join sysrole c on b.roleId=c.roleId and c.available=1\n" +
-            "where a.userName=?1",
-            countQuery = "select count(*) from user a\n" +
-                    "inner join sysuserrole b on a.userId = b.userId \n" +
-                    "inner join sysrole c on b.roleId=c.roleId and c.available=1\n" +
-                    "where a.userName=?1",
+    @Query(value="SELECT   a.userid, a.user_Name, c.role_Id, c.role, c.description\n" +
+                    "FROM\n" +
+                    "    user a\n" +
+                    "        INNER JOIN\n" +
+                    "    sys_user_role b ON a.userid = b.user_Id\n" +
+                    "        INNER JOIN\n" +
+                    "    sys_role c ON b.role_Id = c.role_Id AND c.available = 1\n" +
+                    "WHERE\n" +
+                    "    a.user_Name =?1",
+            countQuery = "select count(*) from user a \n" +
+                    "inner join sys_user_role b on a.userId = b.user_Id\n" +
+                    "inner join sys_role c on b.role_Id=c.role_Id and c.available=1\n" +
+                    "where a.user_Name=?1",
             nativeQuery = true)
     List<IUserRole> findUserRoleByUserName(String userName);
 
@@ -65,19 +71,35 @@ public interface UserRepository extends JpaRepository<User,Integer> {
     List<IUserRole> findAllUserRoleByUserId(Integer userId);
 
     //根据用户名，获取用户具备的权限。
-    @Query(value="select a.userId,a.userName,d.permissionId,d.permission,d.permissionName from user a \n" +
-            "inner join sysuserrole b on a.userId = b.userId \n" +
-            "inner join sysrolepermission c on b.roleId = c.roleId\n" +
-            "inner join syspermission d on c.permissionId=d.permissionId\n" +
-            "where a.userName=?1",
-            countQuery = "select a.userId,a.userName,d.permissionId,d.permission,d.permissionName from user a \n" +
-                    "inner join sysuserrole b on a.userId = b.userId \n" +
-                    "inner join sysrolepermission c on b.roleId = c.roleId\n" +
-                    "inner join syspermission d on c.permissionId=d.permissionId\n" +
-                    "where a.userName=?1",
+    @Query(value="SELECT a.userId,a.user_Name,d.*\n" +
+            "FROM\n" +
+            "    user a INNER JOIN sys_user_role b ON a.userId = b.user_Id\n" +
+            "\tINNER JOIN sys_role_permission c ON b.role_Id = c.role_Id\n" +
+            "\tINNER JOIN sys_permission d ON c.permission_Id = d.permission_Id\n" +
+            "WHERE\n" +
+            "    a.user_Name = ?1",
+            countQuery = "SELECT count(1)\n" +
+                    "FROM\n" +
+                    "    user a INNER JOIN sys_user_role b ON a.userId = b.user_Id\n" +
+                    "INNER JOIN sys_role_permission c ON b.role_Id = c.role_Id\n" +
+                    "INNER JOIN sys_permission d ON c.permission_Id = d.permission_Id\n" +
+                    "WHERE\n" +
+                    "    a.user_Name = ?1",
             nativeQuery = true)
     List<ISysPermission> findUserRolePermissionByUserName(String userName);
 
     @Query(value = "select version()",nativeQuery = true)
     String getDbVersion();
+
+    //根据用户名，获取用户具备的权限。
+    @Query(value="SELECT d.* \n" +
+            "FROM\n" +
+            "    user a INNER JOIN sys_user_role b ON a.userId = b.user_Id\n" +
+            "INNER JOIN sys_role_permission c ON b.role_Id = c.role_Id\n" +
+            "INNER JOIN sys_permission d ON c.permission_Id = d.permission_Id\n" +
+            "WHERE d.resource_type ='menu' and  a.user_Name = ?1 " +
+            "order by d.permission_id",
+            nativeQuery = true)
+    List<ISysPermission> findMeun(String userName);
+
 }

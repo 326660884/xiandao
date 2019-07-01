@@ -16,14 +16,14 @@
     "children": [
       {
         "title": "实时解析",
-        "fontFamily": "my-icon",
+        "fontFamily": "ok-icon",
         "href": "pages/analysis.html",
         "icon": "ok-iconpie-chart",
         "spread": false
       },
       {
         "title": "漏洞检查",
-        "fontFamily": "my-icon",
+        "fontFamily": "ok-icon",
         "icon": "ok-iconcheck-circle",
         "spread": false
       }
@@ -91,6 +91,33 @@
         "title": "可疑IP",
         "icon": "&#xe61c;",
         "href": "pages/common/403.html",
+        "spread": false
+      }
+    ]
+  },
+  {
+    "title": "会员管理",
+    "icon": "&#xe66f;",
+    "href": "",
+    "spread": false,
+    "children": [
+      {
+        "title": "用户列表",
+        "fontFamily": "layui-icon",
+        "icon": "&#xe61c;",
+        "href": "pages/user/user.html",
+        "spread": false
+      },
+      {
+        "title": "角色列表",
+        "icon": "&#xe60a;",
+        "href": "pages/role/role.html",
+        "spread": false
+      },
+      {
+        "title": "权限列表",
+        "icon": "&#xe642;",
+        "href": "pages/permission/permission.html",
         "spread": false
       }
     ]
