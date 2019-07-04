@@ -81,7 +81,6 @@ public class RoleServiceImpl {
 
     //授权前先清除原角色权限，然后重新新增授权
     @Transactional
-
     public void grantAuthorization(Integer roleId, List<Integer> permissionList) {
         roleRepository.deleteRolePermission(roleId);
         for(Integer permissionId:permissionList)
@@ -91,8 +90,22 @@ public class RoleServiceImpl {
     }
 
     @Transactional
-
     public void clearAuthorization(Integer roleId) {
         roleRepository.deleteRolePermission(roleId);
+    }
+
+    /**
+     *
+     * @param sysRole
+     * @param permissions
+     * @return sysRole id
+     */
+    @Transactional
+    public SysRole insertAndRelation(SysRole sysRole, String permissions) {
+        SysRole nowRole = roleRepository.save(sysRole);
+        if(nowRole.getRoleId() != null){
+
+        }
+        return nowRole;
     }
 }

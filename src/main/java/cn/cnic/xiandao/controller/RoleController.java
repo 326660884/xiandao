@@ -1,9 +1,11 @@
 package cn.cnic.xiandao.controller;
 
-import cn.cnic.xiandao.module.*;
+import cn.cnic.xiandao.module.ISysRolePermission;
+import cn.cnic.xiandao.module.ResutlJson;
+import cn.cnic.xiandao.module.SysRole;
 import cn.cnic.xiandao.service.RoleServiceImpl;
 import cn.cnic.xiandao.service.UserServiceImpl;
-import org.apache.shiro.SecurityUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,11 +20,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
-import java.util.*;
-import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/role")
+@Slf4j
 public class RoleController {
 
     @Resource
@@ -232,5 +237,16 @@ public class RoleController {
         }
 
     }
+
+    @PostMapping(value = "/add")
+    @ResponseBody
+    public ResutlJson<?> insert(SysRole sysRole,String permissions){
+        log.info("SysRole {}",sysRole.toString());
+        log.info("SysRole-permissions {}",permissions);
+        roleService.insertAndRelation(sysRole,permissions);
+        return ResutlJson.OK();
+    }
+
+
 
 }

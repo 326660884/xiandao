@@ -1,6 +1,7 @@
 package cn.cnic.xiandao.module;
 
 import lombok.Data;
+import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -12,6 +13,7 @@ import java.util.List;
 @Entity
 @Table(name = "sys_Role")
 @Data
+@ToString
 public class SysRole  {
 
     @Id
@@ -43,7 +45,7 @@ public class SysRole  {
 //    @JoinTable(name="SysUserRole",joinColumns={@JoinColumn(name="roleId")},inverseJoinColumns={@JoinColumn(name="userId")})
 //    private List<User> users;// 一个角色对应多个用户
 
-    @Transient
-    private List<ISysRolePermission> permissions;
+//    @Transient
+//    private List<ISysRolePermission> permissions;
 
 }

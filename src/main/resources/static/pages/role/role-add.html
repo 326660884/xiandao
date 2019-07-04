@@ -27,13 +27,13 @@
         <div class="layui-form-item">
             <label class="layui-form-label">角色名</label>
             <div class="layui-input-block">
-                <input type="text" name="name" placeholder="请输入角色名" autocomplete="off" class="layui-input" lay-verify="required">
+                <input type="text" name="role" placeholder="请输入角色名" autocomplete="off" class="layui-input" lay-verify="required">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">备注</label>
+            <label class="layui-form-label">描述</label>
             <div class="layui-input-block">
-                <input type="text" name="remarks" placeholder="请输入备注" autocomplete="off" class="layui-input" lay-verify="required">
+                <input type="text" name="description" placeholder="请输入描述" autocomplete="off" class="layui-input" lay-verify="required">
             </div>
         </div>
         <div class="layui-form-item">
@@ -64,14 +64,6 @@
         var form = layui.form;
         var $ = layui.jquery;
 
-        form.on('submit(add)', function (data) {
-            console.log(data.field);
-            layer.msg("添加成功！", {icon: 6, time: 1000, anim: 4}, function () {
-                parent.layer.close(parent.layer.getFrameIndex(window.name));
-            });
-            return false;
-        });
-
        $.getJSON("../../permission/tree",function(json){
             layui.use(['tree'],function (){
                 var tree = layui.tree;
@@ -93,9 +85,36 @@
             })
        });
 
+         form.on('submit(add)', function (data) {
+            var params = data.field;
+            var tree = layui.tree.getChecked('treeId');
+            if(tree != null){
+                params.permissions = loop(tree).toString()
+            }
+            $.post("../../role/add"
+                    ,params
+                    ,function(resultData){
+                        console.log(resultData)
+                    },'json')
 
-
+            layer.msg("添加成功！", {icon: 6, time: 1000, anim: 4}, function () {
+                parent.layer.close(parent.layer.getFrameIndex(window.name));
+            });
+            return false;
+        });
     })
+
+    function loop(array){
+        var resutl = [];
+        for(var i = 0; i < array.length;i++){
+            resutl.push(array[i].id)//只需要权限ID
+            if(array[i].children  !== undefined){
+               var childrenList = loop(array[i].children);
+               resutl = resutl.concat(childrenList)
+            }
+        }
+        return resutl;
+    }
 </script>
 </body>
 </html>

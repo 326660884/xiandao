@@ -1,7 +1,7 @@
 package cn.cnic.xiandao.controller;
 
 
-import cn.cnic.xiandao.config.PasswordHelper;
+import cn.cnic.xiandao.utils.PasswordHelper;
 import cn.cnic.xiandao.module.*;
 import cn.cnic.xiandao.service.UserServiceImpl;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +13,6 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.expression.spel.ast.NullLiteral;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;

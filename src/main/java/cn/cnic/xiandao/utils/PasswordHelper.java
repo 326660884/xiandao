@@ -1,4 +1,4 @@
-package cn.cnic.xiandao.config;
+package cn.cnic.xiandao.utils;
 
 import cn.cnic.xiandao.module.User;
 import org.apache.shiro.crypto.RandomNumberGenerator;
