@@ -1,7 +1,5 @@
 package cn.cnic.xiandao.module;
 
-import java.util.List;
-
 /**
  * 用于UserRepository自定义返回实体用户与权限对应表
  */

@@ -15,7 +15,7 @@
     <div class="ok-body-breadcrumb">
             <span class="layui-breadcrumb">
                 <a><cite>首页</cite></a>
-                <a><cite>常用页面</cite></a>
+                <a><cite>会员管理</cite></a>
                 <a><cite>权限列表</cite></a>
             </span>
         <a class="layui-btn layui-btn-sm" href="javascript:location.replace(location.href);" title="刷新">
@@ -30,6 +30,9 @@
             <input class="layui-input" placeholder="请输入权限名" autocomplete="off">
             <button class="layui-btn" lay-submit="" lay-filter="search">
                 <i class="layui-icon layui-icon-search"></i>
+            </button>
+            <button type="button" class="layui-btn">
+                <i class="layui-icon">&#xe602;</i>
             </button>
         </form>
     </div>
@@ -52,6 +55,7 @@
 <script>
     NProgress.start();
     window.onload = function () {
+        //进度条
         NProgress.done();
     };
 
@@ -80,27 +84,25 @@
         layer.load(2);
         treetable.render({
             treeColIndex: 1,
-            treeSpid: -1,
-            treeIdName: 'authorityId',
+            treeSpid: 0,
+            treeIdName: 'permissionId',
             treePidName: 'parentId',
             elem: '#tableId',
-            url: '../../data/permission.json',
+            url: '../../permission/list',
             page: false,
             cols: [[
                 {type: 'numbers'},
-                {field: 'authorityName', minWidth: 200, title: '权限名称'},
-                {field: 'authority', title: '权限标识'},
-                {field: 'menuUrl', title: '菜单url'},
-                {field: 'orderNumber', width: 80, align: 'center', title: '排序号'},
+                {field: 'permissionName', minWidth: 200, title: '权限名称'},
+                {field: 'permission', title: '权限标识'},
+                {field: 'href', title: '菜单url'},
+                {field: 'parentId', width: 80, align: 'center', title: 'pid'},
                 {
-                    field: 'isMenu', width: 80, align: 'center', templet: function (d) {
-                        if (d.isMenu == 1) {
+                    field: 'resourceType', width: 80, align: 'center', templet: function (d) {
+                        if (d.resourceType == 'button') {
                             return '<span class="layui-badge layui-bg-gray">按钮</span>';
                         }
-                        if (d.parentId == -1) {
-                            return '<span class="layui-badge layui-bg-blue">目录</span>';
-                        } else {
-                            return '<span class="layui-badge-rim">菜单</span>';
+                        if (d.resourceType == 'menu') {
+                            return '<span class="layui-badge layui-bg-blue">菜单</span>';
                         }
                     }, title: '类型'
                 },
@@ -116,7 +118,7 @@
             layer.msg('正在查询，请稍后...');
             return false;
         });
-
+        //编辑
         table.on('tool(tableFilter)', function (obj) {
             var data = obj.data;
             console.log("id值：" + data.id);

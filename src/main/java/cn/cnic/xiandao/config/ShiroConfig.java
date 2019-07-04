@@ -25,7 +25,7 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setUnauthorizedUrl("/unauthc");
         shiroFilterFactoryBean.setSuccessUrl("/index");
 
-        filterChainDefinitionMap.put("/pages/user/*", "roles[xu]");
+//        filterChainDefinitionMap.put("/pages/user/*", "roles[xu]");
         filterChainDefinitionMap.put("/pages/*", "authc");
         filterChainDefinitionMap.put("/leftnav", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);

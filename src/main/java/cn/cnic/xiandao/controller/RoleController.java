@@ -1,9 +1,9 @@
 package cn.cnic.xiandao.controller;
 
-import cn.cnic.xiandao.module.ISysRolePermission;
-import cn.cnic.xiandao.module.RoleService;
-import cn.cnic.xiandao.module.SysRole;
+import cn.cnic.xiandao.module.*;
 import cn.cnic.xiandao.service.RoleServiceImpl;
+import cn.cnic.xiandao.service.UserServiceImpl;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -18,27 +18,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/role")
 public class RoleController {
 
     @Resource
     RoleServiceImpl roleService;
 
-    @RequestMapping(value="/role")
+    @Resource
+    UserServiceImpl userService;
+
+
+    @RequestMapping(value="/list")
     @ResponseBody
     @RequiresPermissions("role:view")
-    public Object getRole(HttpServletRequest request, HttpServletResponse response)
+    public ResutlJson<SysRole> getRole(HttpServletRequest request, HttpServletResponse response)
     {
 
         int pageSize = 10;
         try {
-            pageSize =  Integer.parseInt(request.getParameter("pageSize"));
+            pageSize =  Integer.parseInt(request.getParameter("limit"));
         }catch (Exception e)
         {
             e.printStackTrace();
@@ -46,29 +48,26 @@ public class RoleController {
 
         int pageNumber=0 ;
         try {
-            pageNumber =  Integer.parseInt(request.getParameter("pageNumber"))-1;
+            pageNumber =  Integer.parseInt(request.getParameter("page"))-1;
         }catch (Exception e)
         {
             e.printStackTrace();
         }
 
-        Map<String, Object> map = new HashMap<>();
-
         String strRole=request.getParameter("searchText")==null ? "": request.getParameter("searchText");
-
         String sortName=request.getParameter("sortName")==null ? "roleId": request.getParameter("sortName");
         String sortOrder=request.getParameter("sortOrder")==null ? "asc": request.getParameter("sortOrder");
-
         Sort sortLocal = new Sort(sortOrder.equalsIgnoreCase("asc") ? Sort.Direction.ASC: Sort.Direction.DESC,sortName);
         Pageable pageable = PageRequest.of(pageNumber,pageSize,sortLocal);
-
         Page<SysRole> sysRolePage = roleService.findAllByRoleContains(strRole, pageable);
-        map.put("total",sysRolePage.getTotalElements());
-        map.put("rows",sysRolePage.getContent());
-
-        return map;
+        ResutlJson<SysRole> ok = ResutlJson.OK();
+        ok.setData(sysRolePage.getContent());
+        ok.setCount((int)sysRolePage.getTotalElements());
+        return ok;
 
     }
+
+
 
     @RequestMapping("/rlist")
 //    @RequiresPermissions("user:view")

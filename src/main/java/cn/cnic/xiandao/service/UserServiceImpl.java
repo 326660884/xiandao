@@ -1,6 +1,5 @@
 package cn.cnic.xiandao.service;
 
-import cn.cnic.xiandao.dao.RoleRepository;
 import cn.cnic.xiandao.dao.UserRepository;
 import cn.cnic.xiandao.module.*;
 import org.springframework.data.domain.Page;
@@ -36,7 +35,7 @@ public class UserServiceImpl {
 
 
     public List<ISysPermission> findUserRolePermissionByUserName(String userName) {
-        return userRepository.findUserRolePermissionByUserName(userName);
+        return userRepository.findUserPermission(userName,null);
     }
 
 
@@ -98,9 +97,24 @@ public class UserServiceImpl {
     }
 
     public CopyOnWriteArrayList<ISysPermission> getNavs(String userName){
-        List<ISysPermission> allPermission = userRepository.findMeun(userName);
-        CopyOnWriteArrayList<ISysPermission> iSysPermissions = new CopyOnWriteArrayList<>();
-        iSysPermissions.addAll(allPermission);
-        return iSysPermissions;
+        return (CopyOnWriteArrayList)getNavs(userName,true);
+    }
+
+    /**
+     *
+     * @param userName
+     * @param tag 是否包装成并发List
+     * @return CopyOnWriteArrayList ro ArraryList
+     */
+    public List<ISysPermission> getNavs(String userName,boolean tag){
+        if(tag){
+            List<ISysPermission> allPermission = userRepository.findUserPermission(userName,null);
+            CopyOnWriteArrayList<ISysPermission> iSysPermissions = new CopyOnWriteArrayList<>();
+            iSysPermissions.addAll(allPermission);
+            return iSysPermissions;
+        }else{
+            return userRepository.findUserPermission(userName,null);
+        }
+
     }
 }

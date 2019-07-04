@@ -10,7 +10,6 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 
 public interface UserRepository extends JpaRepository<User,Integer> {
@@ -70,36 +69,30 @@ public interface UserRepository extends JpaRepository<User,Integer> {
             nativeQuery = true)
     List<IUserRole> findAllUserRoleByUserId(Integer userId);
 
-    //根据用户名，获取用户具备的权限。
-    @Query(value="SELECT a.userId,a.user_Name,d.*\n" +
-            "FROM\n" +
-            "    user a INNER JOIN sys_user_role b ON a.userId = b.user_Id\n" +
-            "\tINNER JOIN sys_role_permission c ON b.role_Id = c.role_Id\n" +
-            "\tINNER JOIN sys_permission d ON c.permission_Id = d.permission_Id\n" +
-            "WHERE\n" +
-            "    a.user_Name = ?1",
-            countQuery = "SELECT count(1)\n" +
-                    "FROM\n" +
-                    "    user a INNER JOIN sys_user_role b ON a.userId = b.user_Id\n" +
-                    "INNER JOIN sys_role_permission c ON b.role_Id = c.role_Id\n" +
-                    "INNER JOIN sys_permission d ON c.permission_Id = d.permission_Id\n" +
-                    "WHERE\n" +
-                    "    a.user_Name = ?1",
-            nativeQuery = true)
-    List<ISysPermission> findUserRolePermissionByUserName(String userName);
-
     @Query(value = "select version()",nativeQuery = true)
     String getDbVersion();
 
-    //根据用户名，获取用户具备的权限。
-    @Query(value="SELECT d.* \n" +
-            "FROM\n" +
+    /**
+     * 根据用户查询权限列表
+     * @param username 用户名
+     * @param type 权限类型
+     * @return
+     */
+    @Query(value = "SELECT a.userId,a.user_Name,d.* \n" +
+            "FROM \n" +
             "    user a INNER JOIN sys_user_role b ON a.userId = b.user_Id\n" +
             "INNER JOIN sys_role_permission c ON b.role_Id = c.role_Id\n" +
             "INNER JOIN sys_permission d ON c.permission_Id = d.permission_Id\n" +
-            "WHERE d.resource_type ='menu' and  a.user_Name = ?1 " +
-            "order by d.permission_id",
+            "WHERE \n" +
+            "    a.user_Name = ?1",
+            countQuery = "SELECT count(1) \n" +
+                    "FROM \n" +
+                    "    user a INNER JOIN sys_user_role b ON a.userId = b.user_Id\n" +
+                    "INNER JOIN sys_role_permission c ON b.role_Id = c.role_Id\n" +
+                    "INNER JOIN sys_permission d ON c.permission_Id = d.permission_Id\n" +
+                    "WHERE \n" +
+                    "    a.user_Name = ?1 and if(?2 != '',resource_type = ?2, 1=1)",
             nativeQuery = true)
-    List<ISysPermission> findMeun(String userName);
+    List<ISysPermission> findUserPermission(String username,String type);
 
 }

@@ -14,7 +14,7 @@
     <div class="ok-body-breadcrumb">
             <span class="layui-breadcrumb">
                 <a><cite>首页</cite></a>
-                <a><cite>常用页面</cite></a>
+                <a><cite>会员管理</cite></a>
                 <a><cite>用户列表</cite></a>
 				<a><cite>添加角色</cite></a>
             </span>
@@ -23,7 +23,7 @@
         </a>
     </div>
     <!--form表单-->
-    <form class="layui-form layui-form-pane ok-form">
+    <form class="layui-form layui-form-pane ok-form" method="post" action="../../">
         <div class="layui-form-item">
             <label class="layui-form-label">角色名</label>
             <div class="layui-input-block">
@@ -59,7 +59,7 @@
         authtree: 'authtree',
     });
 
-    layui.use(['element', 'form', 'jquery'], function () {
+    layui.use(['element', 'form', 'jquery','tree'], function () {
         var element = layui.element;
         var form = layui.form;
         var $ = layui.jquery;
@@ -71,6 +71,30 @@
             });
             return false;
         });
+
+       $.getJSON("../../permission/tree",function(json){
+            layui.use(['tree'],function (){
+                var tree = layui.tree;
+
+                tree.render({
+                elem: '#authTree'
+                ,data: json.data
+                ,showCheckbox: true  //是否显示复选框
+                ,id: 'treeId'
+                ,isJump: false //是否允许点击节点时弹出新窗口跳转
+                ,click: function(obj){
+                        var data = obj.data;  //获取当前点击的节点数据
+                        layer.msg('状态：'+ obj.state + '<br>节点数据：' + JSON.stringify(data));
+                       console.log( tree.getChecked('treeId') )
+                       }
+                 });
+
+
+            })
+       });
+
+
+
     })
 </script>
 </body>

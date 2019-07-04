@@ -124,9 +124,9 @@ public class LogonController {
     public List<?> getNav(){
         User user=(User)SecurityUtils.getSubject().getPrincipal();
         List<ISysPermission> iSysPermissions = userService.getNavs(user.getUserName());
-        List<NavsPermission> navList = new ArrayList<>(8);
+        List<NavsPermission> navList = new CopyOnWriteArrayList<>();
         for (ISysPermission p:iSysPermissions) {
-            if(p.getLevel() != 1 || p.getparent_id() != null ) {
+            if(p.getparent_id() != 0) {
                 continue;
             }
             NavsPermission nav = new NavsPermission();

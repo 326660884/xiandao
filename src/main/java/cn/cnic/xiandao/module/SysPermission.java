@@ -1,14 +1,14 @@
 package cn.cnic.xiandao.module;
 
 import lombok.Data;
-import org.hibernate.annotations.GenericGenerator;
+import lombok.ToString;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Data
 @Entity
 @Table(name = "sys_permission")
+@ToString
 public class SysPermission {
 
     @Id
@@ -27,7 +27,7 @@ public class SysPermission {
 
     private Integer level;//菜单层级，1（顶级）,2,3
 
-    private Boolean available = Boolean.TRUE;//可获得的
+    private Boolean available;//可获得的
 
     private String href;//资源路径.
 

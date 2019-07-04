@@ -15,7 +15,7 @@
     <div class="ok-body-breadcrumb">
             <span class="layui-breadcrumb">
                 <a><cite>首页</cite></a>
-                <a><cite>常用页面</cite></a>
+                <a><cite>会员管理</cite></a>
                 <a><cite>角色列表</cite></a>
             </span>
         <a class="layui-btn layui-btn-sm" href="javascript:location.replace(location.href);" title="刷新">
@@ -74,15 +74,14 @@
 
         table.render({
             elem: '#tableId',
-            url: '../../data/role.json',
+            url: '../../role/list',
             limit: 10,
             page: true,
             cols: [[
                 {type: 'checkbox'},
-                {field: 'id', title: 'ID', width: 80, sort: true},
-                {field: 'name', title: '角色名', width: 100},
-                {field: 'remarks', title: '备注', width: 100},
-                {field: 'createUser', title: '创建者', width: 85},
+                {field: 'roleId', title: 'ID', width: 80, sort: true},
+                {field: 'description', title: '角色描述', width: 120},
+                {field: 'role', title: '角色名称', width: 100},
                 {field: 'createTime', title: '创建时间', width: 200},
                 {title: '操作', width: 200, templet: '#operationTpl', align: 'center'}
             ]],

@@ -5,10 +5,9 @@ import lombok.Data;
 
 import java.util.List;
 @Data
-public class NavsPermission extends SysPermission {
+public class NavsPermission<T> extends SysPermission {
 
     private String title;
-    private List<ISysPermission> children;
-
-
+    private List<T> children;
+    private Integer id;
 }
