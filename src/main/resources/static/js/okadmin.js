@@ -7,8 +7,7 @@ layui.config({
     $ = layui.jquery,
     layer = layui.layer,
     okTab = layui.okTab({
-//    url: "/data/navs.json",
-      url: "./leftnav",
+    url: "./data/navs1.json",
       openTabNum: 30, //允许同时选项卡的个数
     });
   
