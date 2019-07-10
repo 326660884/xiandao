@@ -24,7 +24,7 @@ export default {
 				container: this.$refs.basicMapbox, // container id
 				style: json, //stylesheet location
 				center: [104.6573, 36.752379], // starting position
-				zoom: 3.7, // starting zoom0
+				zoom: 3.4, // starting zoom0
 				minZoom: 2.5,
 				maxZoom: 18,
 				attributionControl: false,
@@ -118,7 +118,7 @@ export default {
 	// left: 400px;
 	.map {
 		// width: 1000px;
-		height: 900px;
+		height: 800px;
 	}
 }
 </style>
