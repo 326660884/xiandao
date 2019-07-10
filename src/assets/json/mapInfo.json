@@ -1,0 +1,38 @@
+{
+  "data": {
+    "mapSearchResult": [
+      {
+        "latitude": "39.979469299316406",
+        "longitude": "116.334223",
+        "orgName": "中国科学院理论物理研究所"
+      },
+      {
+        "latitude": "39.987819",
+        "longitude": "116.333671",
+        "orgName": "中国科学院计算技术研究所"
+      },
+      {
+        "latitude": "31.843017",
+        "longitude": "117.275366",
+        "orgName": "中国科学技术大学"
+      },
+      {
+        "latitude": "39.997216",
+        "longitude": "116.32847",
+        "orgName": "中国科学院化学研究所"
+      },
+      {
+        "latitude": "39.992746",
+        "longitude": "116.32906",
+        "orgName": "中国科学院文献情报中心（国家科学图书馆）"
+      },
+      {
+        "latitude": "30.636746",
+        "longitude": "104.07676",
+        "orgName": "中国科学院成都文献情报中心"
+      }
+    ]
+  },
+  "resultCode": 1,
+  "validateFlag": false
+}

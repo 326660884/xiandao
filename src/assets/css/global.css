@@ -1,0 +1,15 @@
+.marker {
+  display: block;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 0;
+}
+
+.el-dialog,
+.el-pager li {
+  background: #424648 !important;
+}
+/* .el-button--text {
+  color: rgb(255, 255, 255);
+} */
