@@ -201,7 +201,7 @@ export default {
 			// background: url('~@/assets/images/panel.png') center center no-repeat;
 			background-size: 100% 100%;
 			position: relative;
-			width: 1500px;
+			width: 1000px;
 			height: 900px;
 		}
 
