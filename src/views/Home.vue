@@ -2,6 +2,7 @@
 	<div class="home">
 		<div>
 			<div class="header">
+				<h1 class="title">先导监测</h1>
 				<div class="header-title"
 						 @click="routeJump">
 					<el-button type="text">跳转连接</el-button>
@@ -15,7 +16,8 @@
 									class="pie"
 									:legend-visible="false"
 									:data="chartData"></ve-pie>
-					<chart-histogram style="top:-50px"></chart-histogram>
+					<chart-histogram style="top:-200px"></chart-histogram>
+					<!--  -->
 				</div>
 				<div class="middle-container">
 					<Map class="mapbox"
@@ -23,23 +25,24 @@
 				</div>
 				<div class="right-container">
 					<!-- <span class="title">指数</span> -->
-					<chart-liquidfill></chart-liquidfill>
+					<!-- <chart-liquidfill></chart-liquidfill> -->
+					<ve-radar :legend-visible="false"
+										:data="chartData"
+										height="250px"
+										:colors="colors"></ve-radar>
 					<ve-pie :colors="colors"
 									class="pie"
+									height="300px"
 									:legend-visible="false"
 									:data="chartData"></ve-pie>
-					<chart-histogram style="top:-50px"></chart-histogram>
+					<ve-bar :legend-visible="false"
+									:colors="colors"
+									height="300px"
+									style="top:-20px"
+									:data="chartData"></ve-bar>
 				</div>
 			</div>
-			<div class="Footer">
-				<ve-line class="charts-container"
-								 :colors="colors"
-								 :legend-visible="false"
-								 :data="chartData"
-								 :grid="grid"
-								 height="300px"
-								 :settings="chartSettings"></ve-line>
-			</div>
+
 		</div>
 		<el-dialog :visible.sync="centerDialogVisible"
 							 class="dialog"
@@ -84,9 +87,8 @@ export default {
 		chartLine
 	},
 	data() {
-		this.colors = ['#2f4554', '#61a0a8',
-			'#d48265', '#91c7ae', '#749f83',
-			'#ca8622', '#bda29a']
+		this.colors = ['#2f4554', '#325299',
+			'#1A93F8', '#3E95CB']
 		this.xAxis = {
 			axisLine: {
 				show: false
@@ -161,7 +163,12 @@ export default {
 		background: url('~@/assets/images/header.png') center center no-repeat;
 		color: white;
 		text-align: center;
-		line-height: 60px;
+		line-height: 30px;
+		font-size: 30px;
+
+		// .title {
+		// 	font-size: 38px;
+		// }
 
 		.header-title {
 			height: 58px;
@@ -183,13 +190,15 @@ export default {
 
 		.left-container {
 			float: left;
+			height: 80vh;
 			width: 300px;
 			display: flex;
 			flex-direction: column;
 			margin-left: 50px;
 
 			.pie {
-				top: -50px;
+				top: -100px;
+				height: 300px;
 			}
 		}
 
@@ -202,28 +211,21 @@ export default {
 			background-size: 100% 100%;
 			position: relative;
 			width: 1000px;
-			height: 900px;
+			height: 800px;
 		}
 
 		.right-container {
 			float: left;
+			margin-left: 120px;
 			width: 300px;
 			display: flex;
 			flex-direction: column;
-			// margin-left: 1800px;
 
+			// margin-left: 1800px;
 			.pie {
 				top: -50px;
 			}
 		}
-	}
-
-	.Footer {
-		position: relative;
-		buttom: 10px;
-		width: 1100px;
-		height: 300px;
-		// margin 2px auto;
 	}
 
 	.dialog {
