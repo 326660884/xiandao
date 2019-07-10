@@ -3,3 +3,4 @@ target
 *.iml
 catalina.base_IS_UNDEFINED
 *.md
+node_modules
