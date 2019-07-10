@@ -1,5 +1,7 @@
 #Windows
+!README.md
 target
 *.iml
 catalina.base_IS_UNDEFINED
 *.md
+vue
