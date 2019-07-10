@@ -28,7 +28,12 @@ export default {
 				minZoom: 2.5,
 				maxZoom: 18,
 				attributionControl: false,
-				trackResize: true
+				trackResize: true,
+				pitchWithRotate:false,
+				dragRotate:false,
+				dragPan:false,
+				boxZoom:false,
+				scrollZoom:false
 			})
 		},
 		getInfo() {
