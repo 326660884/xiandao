@@ -3,7 +3,7 @@
 								 
 								 :legend-visible="false"
 								 :data="chartData"
-								 height="250px"></ve-liquidfill>
+								 height="350px"></ve-liquidfill>
 </template>
 
 <script>

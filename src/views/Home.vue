@@ -2,55 +2,40 @@
 	<div class="home">
 		<div>
 			<div class="header">
-				<h1 class="title">先导监测</h1>
-				<div class="header-title"
-						 @click="routeJump">
-					<el-button type="text">跳转连接</el-button>
+				<h1 class="title">先导态势分析系统</h1>
+				<div class="header-title"  @click="routeJump">
+					<el-button type="text">监控系统</el-button>
 				</div>
 			</div>
 			<div class="warp">
 				<div class="left-container">
-					<!-- <span class="title">指数</span> -->
-					<chart-liquidfill></chart-liquidfill>
-					<ve-pie :colors="colors"
-									style="top:-100px"
-									:legend-visible="false"
-									:data="chartData"></ve-pie>
-					<chart-histogram style="top:-200px"></chart-histogram>
 					<ve-ring :colors="colors"
 									 :legend-visible="false"
 									 height="300px"
-									 style="top:-350px"
 									 :data="chartData"></ve-ring>
-					<!--  -->
+					
+					<ve-pie :colors="colors"
+									style="top:-40px"
+									:legend-visible="false"
+									:data="chartData"></ve-pie>
+					
 				</div>
 				<div class="middle-container">
 					<Map class="mapbox"
 							 @openDialog="openDialog"></Map>
 				</div>
 				<div class="right-container">
-					<!-- <span class="title">指数</span> -->
-					<!-- <chart-liquidfill></chart-liquidfill> -->
 					<ve-radar :legend-visible="false"
 										:data="chartData"
+										style="top:50px"
 										height="250px"
 										:colors="colors"></ve-radar>
-					<ve-pie :colors="colors"
-									class="pie"
-									height="300px"
-									style="top:-120px"
-									:legend-visible="false"
-									:data="chartData"></ve-pie>
 					<ve-bar :legend-visible="false"
 									:colors="colors"
 									height="300px"
-									style="top:-150px"
+									style="top:60px"
 									:data="chartData"></ve-bar>
-					<ve-bar :legend-visible="false"
-									:colors="colors"
-									height="300px"
-									style="top:-240px"
-									:data="chartData"></ve-bar>
+					
 				</div>
 			</div>
 
@@ -125,9 +110,11 @@ export default {
 			this.centerDialogVisible = true
 		},
 		routeJump() {
-			this.$router.push({
-				path: '/about',
-			})
+			// this.$router.push({
+			// 	path: '/about',
+			// })
+			let href = window.location.href
+			window.open(href.replace('#/','')+'xd/')
 		}
 	},
 	created() {
