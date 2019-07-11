@@ -13,11 +13,9 @@ export default {
 		this.colors = ['#FFFFFF', '#2f4554', '#61a0a8',
 			'#d48265', '#91c7ae', '#749f83',
 			'#ca8622', '#bda29a']
+
 		this.chartSettings = {
-			title:{
-				text:'昨天解析比例',
-				show:true
-			},
+
 			roseType: 'radius',
 			// itemStyle: {
 			// 	color: ['#293B54', '#00081B']

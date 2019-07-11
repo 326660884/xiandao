@@ -3,12 +3,26 @@
 		<div>
 			<div class="header">
 				<h1 class="title">先导态势分析系统</h1>
-				<div class="header-title"  @click="routeJump">
+				<div class="header-title"
+						 @click="routeJump">
+					<el-button type="text">监控系统</el-button>
+				</div>
+				<div class="header-title"
+						 @click="routeJump">
+					<el-button type="text">监控系统</el-button>
+				</div>
+				<div class="header-title"
+						 @click="routeJump">
+					<el-button type="text">监控系统</el-button>
+				</div>
+				<div class="header-title"
+						 @click="routeJump">
 					<el-button type="text">监控系统</el-button>
 				</div>
 			</div>
 			<div class="warp">
 				<div class="left-container">
+					<h1 class="title">昨天解析比例</h1>
 					<ve-ring :colors="colors"
 									 :legend-visible="false"
 									 height="300px"
@@ -16,7 +30,6 @@
 									 :title="chartSettings"></ve-ring>
 					
 					<ve-pie :colors="colors"
-									style="top:-40px"
 									:legend-visible="false"
 									:data="chartData"
 									:settings="chartSettings"></ve-pie>
@@ -24,34 +37,41 @@
 				</div>
 				<div class="middle-container">
 					<Map class="mapbox"
+							 :mapInfoJson="mapInfoJson"
 							 @openDialog="openDialog"></Map>
 				</div>
 				<div class="right-container">
+					<h1 class="title">昨天解析比例</h1>
 					<ve-radar :legend-visible="false"
 										:data="chartData"
-										style="top:50px"
-										height="250px"
+										height="300px"
+										style="top:70px"
 										:colors="colors"></ve-radar>
+					<h1 class="title">昨天解析比例</h1>
 					<ve-bar :legend-visible="false"
 									:colors="colors"
+									style="top:100px"
 									height="300px"
-									style="top:60px"
+									:grid="grid"
 									:data="chartData"></ve-bar>
-					
 				</div>
 			</div>
-
 		</div>
 		<el-dialog :visible.sync="centerDialogVisible"
 							 class="dialog"
 							 width="30%"
 							 center>
 			<div class="dialog-container">
+				<h1 class="title">详情</h1>
+				<ve-pie :colors="colors"
+								:legend-visible="false"
+								:grid="grid"
+								height="300px"
+								:data="chartData"></ve-pie>
 				<ve-line class="charts-container"
 								 :colors="colors"
 								 :legend-visible="false"
 								 :data="chartData"
-								 :grid="grid"
 								 height="300px"
 								 :settings="chartSettings"></ve-line>
 			</div>
@@ -63,28 +83,28 @@
 </template>
 
 <script>
+import { getList } from '@/api/map'
 import theme from '@/assets/json/halloween.project.json'
 import chalktheme from '@/assets/json/chalk.project.json'
 import waldenTheme from '@/assets/json/walden.project.json'
 // @ is an alias to /src
-import chartRing from '@/components/charts/ring'
-import chartPie from '@/components/charts/pie'
-import chartHistogram from '@/components/charts/histogram'
-import chartLiquidfill from '@/components/charts/liquidfill'
-import chartLine from '@/components/charts/line'
+// import chartRing from '@/components/charts/ring'
+// import chartPie from '@/components/charts/pie'
+// import chartHistogram from '@/components/charts/histogram'
+// import chartLiquidfill from '@/components/charts/liquidfill'
+// import chartLine from '@/components/charts/line'
 import Map from '@/components/map'
 
 export default {
 	name: 'home',
 	components: {
-		Map,
-		chartRing,
-		chartPie,
-		chartHistogram,
-		chartLiquidfill,
-		chartLine
+		Map
 	},
 	data() {
+		this.title = {
+			text: '昨天解析比例',
+			show: true
+		}
 		this.colors = ['#2f4554', '#325299',
 			'#1A93F8', '#3E95CB']
 		this.xAxis = {
@@ -92,7 +112,21 @@ export default {
 				show: false
 			}
 		}
+		this.theme = chalktheme.theme
+		this.chartSettings = {
+			stack: { '用户': ['访问用户', '下单用户'] },
+			area: true,
+		}
+		this.grid = {
+			show: true,
+			top: 10,
+			bottom: 10,
+			borderWidth: 0,
+			// backgroundColor: '#ccc',
+			borderColor: 'rgba(0, 0, 0, 0.1)'
+		}
 		return {
+			mapInfoJson: {},
 			centerDialogVisible: false,
 			chartData: {
 				columns: ['日期', '访问用户', '下单用户', '下单率'],
@@ -122,28 +156,16 @@ export default {
 			// 	path: '/about',
 			// })
 			let href = window.location.href
-			window.open(href.replace('#/','')+'xd/')
+			window.open(href.replace('#/', '') + 'xd/')
+		},
+		requastTestList() {
+			getList().then(res => {
+				this.mapInfoJson = res
+			})
 		}
 	},
 	created() {
-		this.xAxis = {
-			axisLine: {
-				show: false
-			}
-		}
-		this.theme = chalktheme.theme
-		this.chartSettings = {
-			stack: { '用户': ['访问用户', '下单用户'] },
-			area: true,
-		}
-		this.grid = {
-			show: true,
-			// top: 50,
-			// left: 10,
-			borderWidth: 0,
-			// backgroundColor: '#ccc',
-			borderColor: 'rgba(0, 0, 0, 0.1)'
-		}
+		this.requastTestList()
 	},
 	mounted() {
 
@@ -166,23 +188,27 @@ export default {
 	background-size: 100% 100%;
 
 	.header {
-		background: url('~@/assets/images/header.png') center center no-repeat;
-		color: white;
-		text-align: center;
-		line-height: 30px;
-		font-size: 30px;
+		.title {
+			background: url('~@/assets/images/header.png') center center no-repeat;
+			color: white;
+			text-align: center;
+			line-height: 30px;
+			font-size: 30px;
+		}
 
-		// .title {
-		// font-size: 38px;
-		// }
 		.header-title {
-			height: 58px;
-			width: 300px;
 			background: url('~@/assets/images/button.png') center center no-repeat;
 			background-size: 100% 100%;
+			float: left;
 			position: relative;
+			display: inline-block;
+			width: 200px;
+			height: 50px;
+			font-size: 30px;
+			line-height: 30px;
+			text-align: center;
 			left: 50px;
-			top: 50px;
+			top: 10px;
 			color: white;
 			cursor: pointer;
 			z-index: 1000;
@@ -201,6 +227,14 @@ export default {
 			display: flex;
 			flex-direction: column;
 			margin-left: 50px;
+
+			.title {
+				position: relative;
+				color: white;
+				font-size: 23px;
+				text-align: center;
+				top: 70px;
+			}
 		}
 
 		.middle-container {
@@ -222,6 +256,14 @@ export default {
 			display: flex;
 			flex-direction: column;
 			height: 85vh;
+
+			.title {
+				position: relative;
+				color: white;
+				font-size: 23px;
+				text-align: center;
+				top: 70px;
+			}
 
 			// margin-left: 1800px;
 			.pie {
