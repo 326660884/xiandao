@@ -13,10 +13,15 @@
 					<!-- <span class="title">指数</span> -->
 					<chart-liquidfill></chart-liquidfill>
 					<ve-pie :colors="colors"
-									class="pie"
+									style="top:-100px"
 									:legend-visible="false"
 									:data="chartData"></ve-pie>
 					<chart-histogram style="top:-200px"></chart-histogram>
+					<ve-ring :colors="colors"
+									 :legend-visible="false"
+									 height="300px"
+									 style="top:-350px"
+									 :data="chartData"></ve-ring>
 					<!--  -->
 				</div>
 				<div class="middle-container">
@@ -33,12 +38,18 @@
 					<ve-pie :colors="colors"
 									class="pie"
 									height="300px"
+									style="top:-120px"
 									:legend-visible="false"
 									:data="chartData"></ve-pie>
 					<ve-bar :legend-visible="false"
 									:colors="colors"
 									height="300px"
-									style="top:-20px"
+									style="top:-150px"
+									:data="chartData"></ve-bar>
+					<ve-bar :legend-visible="false"
+									:colors="colors"
+									height="300px"
+									style="top:-240px"
 									:data="chartData"></ve-bar>
 				</div>
 			</div>
@@ -167,9 +178,8 @@ export default {
 		font-size: 30px;
 
 		// .title {
-		// 	font-size: 38px;
+		// font-size: 38px;
 		// }
-
 		.header-title {
 			height: 58px;
 			width: 300px;
@@ -187,6 +197,7 @@ export default {
 	.warp {
 		min-width: 1500px;
 		overflow-x: auto;
+		height: 90vh;
 
 		.left-container {
 			float: left;
@@ -195,17 +206,12 @@ export default {
 			display: flex;
 			flex-direction: column;
 			margin-left: 50px;
-
-			.pie {
-				top: -100px;
-				height: 300px;
-			}
 		}
 
 		.middle-container {
 			float: left;
 			overflow: hidden;
-			// margin-left: 410px;
+			margin-left: 50px;
 			margin-top: 8px;
 			// background: url('~@/assets/images/panel.png') center center no-repeat;
 			background-size: 100% 100%;
@@ -220,6 +226,7 @@ export default {
 			width: 300px;
 			display: flex;
 			flex-direction: column;
+			height: 85vh;
 
 			// margin-left: 1800px;
 			.pie {
