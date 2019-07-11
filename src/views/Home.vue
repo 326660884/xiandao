@@ -12,12 +12,14 @@
 					<ve-ring :colors="colors"
 									 :legend-visible="false"
 									 height="300px"
-									 :data="chartData"></ve-ring>
+									 :data="chartData"
+									 :title="chartSettings"></ve-ring>
 					
 					<ve-pie :colors="colors"
 									style="top:-40px"
 									:legend-visible="false"
-									:data="chartData"></ve-pie>
+									:data="chartData"
+									:settings="chartSettings"></ve-pie>
 					
 				</div>
 				<div class="middle-container">
@@ -102,6 +104,12 @@ export default {
 					{ '日期': '1/5', '访问用户': 3792, '下单用户': 3492, '下单率': 0.323 },
 					{ '日期': '1/6', '访问用户': 4593, '下单用户': 4293, '下单率': 0.78 }
 				]
+			},
+			chartSettings:{
+				
+					text:'昨天解析比例',
+					show:true
+				
 			}
 		}
 	},

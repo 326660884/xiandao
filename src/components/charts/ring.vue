@@ -25,11 +25,11 @@ export default {
 		}
 		return {
 			chartData: {
-				columns: ['百分比', '解析次数'],
+				columns: ['proportion', 'number'],
 				rows: [
-					{ '百分比': '1/1', '解析成功': 1393 },
-					{ '日期': '1/2', '访问用户': 3530 },
-					{ '日期': '1/3', '访问用户': 2923 }
+					{ 'proportion': '1/1', 'number': 1393 },
+					{ 'proportion': '1/2', 'number': 3530 },
+					{ 'proportion': '1/3', 'number': 2923 }
 				]
 			}
 		}
