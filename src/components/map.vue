@@ -6,10 +6,13 @@
 </template>
 
 <script>
-import mapInfoJson from '@/assets/json/mapInfo'
+// import mapInfoJson from '@/assets/json/mapInfo'
 import mapboxgl from 'mapbox-gl'
 import json from '@/assets/json/bugStyle'
 export default {
+	props: {
+		mapInfoJson: Object
+	},
 	data() {
 		return {
 			mapboxglToken: 'pk.eyJ1IjoiYW5kcmVhbiIsImEiOiJjaW5qenVpMXAweHJkdHRtM3FtaHl1enltIn0.nzAYEO-QbRgwKCrf6kOf2Q',
@@ -29,16 +32,16 @@ export default {
 				maxZoom: 18,
 				attributionControl: false,
 				trackResize: true,
-				pitchWithRotate:false,
-				dragRotate:false,
-				dragPan:false,
-				boxZoom:false,
-				scrollZoom:false
+				pitchWithRotate: false,
+				dragRotate: false,
+				dragPan: false,
+				boxZoom: false,
+				scrollZoom: false
 			})
 		},
 		getInfo() {
 			let _this = this
-			var points = mapInfoJson.data.mapSearchResult
+			var points = this.mapInfoJson.data.mapSearchResult
 			var features = []
 			for (var i = 0; i < points.length; i++) {
 				var feature = {
@@ -92,7 +95,6 @@ export default {
 	},
 
 	mounted() {
-		console.log(mapInfoJson)
 		this.initMap()
 		//双击放大
 		// map.on('dblclick', function (e) {
