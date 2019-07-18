@@ -1,6 +1,9 @@
 package cn.cnic.xiandao.controller;
 
 
+import cn.cnic.xiandao.model.Employee;
+import cn.cnic.xiandao.service.impl.BaseServiceImpl;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +17,9 @@ public class LogonController {
 
     @Autowired
     private HttpServletRequest httpServletRequest;
+
+    @Autowired
+    BaseServiceImpl<BaseMapper<Employee>,Employee> service;
 
 
     @GetMapping("/login")
