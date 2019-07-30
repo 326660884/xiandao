@@ -206,7 +206,6 @@ export default {
 	},
 	methods: {
 		openDialog(marker) {
-			console.log(marker)
 			this.centerDialogVisible = true
 		},
 		routeJump(index, path) {
