@@ -10,6 +10,9 @@
 .el-pager li {
   background: #303133 !important;
 }
+.el-table th, .el-table tr {
+  background-color: #303133;
+}
 /* .el-button--text {
   color: rgb(255, 255, 255);
 } */
