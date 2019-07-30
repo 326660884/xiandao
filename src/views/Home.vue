@@ -50,6 +50,8 @@
 					<h2 class="title">昨日服务器被攻击统计</h2>
 					<ve-pie :colors="colors"
 									:legend-visible="false"
+									width="400px"
+									height="400px"
 									:data="attacked"></ve-pie>
 
 				</div>
@@ -62,6 +64,7 @@
 					<h2 class="title">攻击类型分析</h2>
 					<ve-radar :legend-visible="false"
 										height="300px"
+										width="400px"
 										style="top:70px"
 										:colors="colors"
 										:data="a_type"></ve-radar>
@@ -330,7 +333,7 @@ export default {
 				color: white;
 				font-size: 23px;
 				text-align: center;
-				top: 70px;
+				top: 60px;
 			}
 
 			.safety-index {
