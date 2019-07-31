@@ -5,3 +5,7 @@ target
 catalina.base_IS_UNDEFINED
 *.md
 vue
+log
+/log/
+
+
