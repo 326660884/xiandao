@@ -21,7 +21,7 @@ spring:
   liquibase:
     enabled: false
   datasource:
-    url: jdbc:p6spy:mysql://159.226.16.168:26001/xiandao?characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false
+    url: jdbc:p6spy:mysql://127.0.0.1:26001/xiandao?characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false
     username: xiandao
     password: qwer1234!@#$
     type: com.zaxxer.hikari.HikariDataSource

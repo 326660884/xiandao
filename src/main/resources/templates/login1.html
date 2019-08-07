@@ -19,7 +19,7 @@
 </head>
 <body>
 <div id="app">
-    <form class="layui-form" action="login" method="post">
+    <form class="layui-form" action="" method="">
         <div class="login_face"><img src="./images/logo20171207.png" class="userAvatar"></div>
         <div class="layui-form-item input-item">
             <label for="userName">用户名</label>
@@ -38,7 +38,7 @@
             <div class="img ok-none-select" id="codeImg"></div>
         </div>
         <div class="layui-form-item">
-            <button class="layui-btn layui-block" lay-filter="login" lay-submit="">登录</button>
+            <button class="layui-btn layui-block" lay-filter="login" lay-submit>登录</button>
         </div>
     </form>
 </div>
@@ -67,10 +67,21 @@
     });
 
     form.on('submit(login)', function (data) {
-      console.log("login data ",data)
-      layer.msg("登陆中...", {icon: 6, time: 1000, anim: 0}, function () {
-      });
 
+      var index = layer.msg("登陆中...", {icon: 6, anim: 0}, function () {
+      });
+      alert($('.layui-form').text())
+      $.post("/authentication",data,function(res){
+        alert('submint')
+        if(res.code === 0){
+            sessionStorage.setItem("username",data.userName);
+            location.replace('index.html');
+        }else{
+            layer.close(index);
+            layer.msg(data.msg,{icon: 6, timeout:1000, anim: 0});
+        }
+      },'json');
+      return false;
     });
 
     //表单输入效果
