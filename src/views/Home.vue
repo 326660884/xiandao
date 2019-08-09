@@ -7,7 +7,7 @@
 					<div class="user-info">
 						<a class="login-out"
 							 href="">
-							<i></i>退出
+							<i></i>{{setUserName}}
 						</a>
 					</div>
 					<ul>
@@ -207,6 +207,13 @@ export default {
 			}
 		}
 	},
+	computed: {
+		setUserName:function () {
+			var username = sessionStorage.getItem("username");
+			console.log("username = ",username)
+			return username
+		}
+	},
 	methods: {
 		openDialog(marker) {
 			this.centerDialogVisible = true
@@ -229,7 +236,10 @@ export default {
 		this.requastTestList()
 	},
 	mounted() {
-
+		//开发是注释掉，
+		// if(sessionStorage.getItem("username")==null){
+			// this.$router.push('/login') // 跳转登录
+		// }
 	}
 }
 </script>
