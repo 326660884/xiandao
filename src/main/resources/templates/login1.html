@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>login1</title>
+    <title>登录</title>
     <meta http-equiv="Expires" content="0">
     <!--设置不缓存页面-->
     <meta http-equiv="Pragma" content="no-cache">
@@ -38,7 +38,7 @@
             <div class="img ok-none-select" id="codeImg"></div>
         </div>
         <div class="layui-form-item">
-            <button class="layui-btn layui-block" lay-filter="login" lay-submit>登录</button>
+            <button class="layui-btn layui-block"  lay-submit lay-filter="login" >登录</button>
         </div>
     </form>
 </div>
@@ -67,20 +67,31 @@
     });
 
     form.on('submit(login)', function (data) {
-
       var index = layer.msg("登陆中...", {icon: 6, anim: 0}, function () {
+
       });
-      alert($('.layui-form').text())
-      $.post("/authentication",data,function(res){
-        alert('submint')
-        if(res.code === 0){
-            sessionStorage.setItem("username",data.userName);
-            location.replace('index.html');
-        }else{
-            layer.close(index);
-            layer.msg(data.msg,{icon: 6, timeout:1000, anim: 0});
-        }
-      },'json');
+
+      $.ajax({
+            url: '/xd/authentication',
+            data: JSON.stringify(data.field),
+            type: 'POST',
+            contentType: 'application/json',
+            success: function (res) {
+                if(res.code === 0){
+                    sessionStorage.setItem("username",data.field.userName);
+                    location.replace('index.html');
+                }else{
+                    layer.close(index);
+                    layer.msg(data.msg,{icon: 6, timeout:1000, anim: 0});
+                }
+            },
+            error: function (xhr) {
+                console.log(xhr)
+            }
+        });
+
+
+
       return false;
     });
 

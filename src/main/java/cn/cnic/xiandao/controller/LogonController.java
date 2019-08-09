@@ -11,8 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 @Controller
 @Slf4j
@@ -40,13 +43,18 @@ public class LogonController {
 
 
     @PostMapping("/authentication")
-    public ResultVO authentication(String userName,String password){
+    @ResponseBody
+    public ResultVO authentication(@RequestBody Map<String,Object> map){
         ResultVO<Object> build = ResultVO.builder().build();
-        if("admin".equals("userName") && "123456".equals(password) ){
+        log.info("authentication map : {}",map.toString());
+        String userName = map.get("userName").toString();
+        String password = map.get("password").toString();
+        if("admin".equals(userName) && "123456".equals(password) ){
             build.setCode(0);
+
             return build;
         }
-        if("许会鹏".equals("userName") && "123456".equals(password)){
+        if("许会鹏".equals(userName) && "123456".equals(password)){
             build.setCode(0);
             return build;
         }

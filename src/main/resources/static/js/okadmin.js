@@ -3,14 +3,22 @@ layui.config({
   base: "./lib/okplugins/"
 }).use(['element', 'layer', 'okUtils', 'okTab'], function () {
   var element = layui.element,
-    okUtils = layui.okUtils,
-    $ = layui.jquery,
-    layer = layui.layer,
-    okTab = layui.okTab({
-    url: "./data/navs1.json",
-      openTabNum: 30, //允许同时选项卡的个数
-    });
-  
+     okUtils = layui.okUtils,
+     $ = layui.jquery,
+     layer = layui.layer,
+     okTab = layui.okTab({
+     url: "./data/navs1.json",
+       openTabNum: 30, //允许同时选项卡的个数
+     });
+
+    //登录判断
+     var username = sessionStorage.getItem("username");
+     if(username != null){
+        $('#username').replaceWith(username)
+     }else{
+        location.replace('login');
+     }
+
   okTab.render(function () {
     //左侧导航渲染完成之后的操作
     
@@ -144,9 +152,9 @@ layui.config({
       title: "系统公告",
       btn: "我知道啦",
       btnAlign: 'c',
-      content: "ok-admin v2.0上线啦(^し^)<br />" +
-        "在此郑重承诺该模板<span style='color:#5cb85c'>永久免费</span>为大家提供" +
-        "<br />若有更好的建议欢迎<span id='noticeQQ'>加入QQ群</span>一起聊",
+      content: "尊敬的各位用户，您好：<br />" +
+        "&nbsp;&nbsp;请重点防范带有<span style='color:#5cb85c'>压缩包</span>附件的钓鱼式诈骗邮件;<br />" +
+        "&nbsp;&nbsp;请及时升级操作系统安全补丁，升级Web、数据库等服务程序，防止病毒利用漏洞传播;",
       yes: (index) => {
         if (srcWidth > 800) {
           layer.tips('公告跑到这里去啦', '#notice', {
