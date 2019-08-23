@@ -136,11 +136,11 @@
 
 <div class="layui-row layui-col-space10">
 	<blockquote class="layui-elem-quote" style="background-color: #FAFAFA;font-size: 18px;">
-		实时DNS服务
+		网络情况
 	</blockquote>
 	<div class="layui-row  layui-col-md12">
 		<div class="layui-card">
-			<div class="layui-card-header">服务器统计</div>
+			<div class="layui-card-header">网络运行情况</div>
 			<div class="layui-card-body map-body" >
 				<table id="oneGroup" lay-filter="oneGroup"></table>
 			</div>
@@ -148,7 +148,9 @@
 	</div>
 </div>
 
-
+<script type="text/html" id="statusTpl">
+    <span href="" class="layui-table-link" style="color: #01AAED;" target="_blank">{{ d.status }}</span>
+</script>
 
 </body>
 </html>

@@ -16,7 +16,7 @@ layui.config({
      if(username != null){
         $('#username').replaceWith(username)
      }else{
-        location.replace('login');
+        // location.replace('login');
      }
 
   okTab.render(function () {

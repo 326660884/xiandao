@@ -38,6 +38,8 @@ layui.config({
             o.requsetNum = (Math.random() * 1000).toFixed()+1000
             o.requsetIPNum =(Math.random() * 1000).toFixed()+1000
             o.domainNum =(Math.random() * 1000).toFixed()+1000
+            o.status ='正常'
+            o.netflow =(Math.random() * 10).toFixed()+1+'Mb/s'
             res.data.list.push(o)
         }
 
@@ -52,7 +54,9 @@ layui.config({
         {field: "ip", title: "服务器ip"},
         {field: "requsetNum", title: "请求次数"},
         {field: "requsetIPNum", title: "请求IP个数"},
-        {field: "domainNum", title: "解析域名个数"}
+        {field: "status", templet: '#statusTpl', title: "网络运行状态"},
+        {field: "netflow", title: "网络运行流量"}
+        
       ]], //设置表头
     });
   }
