@@ -175,36 +175,7 @@ layui.config({
       }
     });
   }
-  
-  /**
-   * 捐赠作者
-   */
-  $(".layui-footer button.donate").click(function () {
-    layer.tab({
-      area: ["330px", "350px"],
-      tab: [{
-        title: "支付宝",
-        content: "<img src='images/zfb.jpg' width='200' height='300' style='margin-left: 60px'>"
-      }, {
-        title: "微信",
-        content: "<img src='images/wx.jpg' width='200' height='300' style='margin-left: 60px'>"
-      }]
-    });
-  });
-  
-  /**
-   * QQ群交流
-   */
-  $("body").on("click", ".layui-footer button.communication,#noticeQQ", function () {
-    layer.tab({
-      area: ["330px", "350px"],
-      tab: [{
-        title: "QQ群",
-        content: "<img src='images/qq.jpeg' width='200' height='300' style='margin-left: 60px'>"
-      }]
-    });
-  });
-  
+
   /**
    * 退出操作
    */
