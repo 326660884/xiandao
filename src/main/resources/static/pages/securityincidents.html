@@ -59,21 +59,32 @@
         table.render({
             elem: '#tableId',
             url: '../data/securityincidents.json',
+            cellMinWidth: 100,
             limit: 10,
             page: true,
             cols: [[
                 {type: 'checkbox'},
-                {field: 'createTime', title: '事件时间'},
-                {field: 'bugname', title: '事件名称'},
-                {field: 'bugtext', title: '漏洞简述',width: 200},
-                {field: 'num', title: '异常次数'},
-                {field: 'level', title: '严重等级'},
-                {field: 'from', title: '来源'},
-                {field: 'status', title: '状态', templet: '#statusTpl', align: 'center'},
-                {title: '操作', width: 200, templet: '#operationTpl', align: 'center'}
+                {field: 'TimeOfOccurrence', title: '发生时间'},
+                {field: 'EventType', title: '事件类型'},
+                {field: 'EventName', title: '事件名称'},
+                {field: 'EventLevel', title: '事件等级'},
+                {field: 'OriginIp', title: '源IP',width:140},
+                {field: 'OriginIpAbb', title: '源IP简称'},
+                {field: 'DestIp', title: '目的IP',width:140},
+                {field: 'DestIpAbb', title:'目的IP简称'},
+                {field: 'AttackTargetPort', title: '攻击目标端口'},
+                {field: 'EventFrequency', title: '事件频率'},
+                {field: 'EventOrigin', title: '事件来源'},
+                {field: 'BelongTo', title: '归属',},
+                {field: 'Status', title: '状态'},
+                {field: 'ProcPerson', title: '处理人'},
+               {title: '操作', width: 200, templet: '#operationTpl', align: 'center'}
+
             ]],
             done: function (res, curr, count) {
                 $("#countNum").text(count);
+                $('th').css({'background-color': "#212D4E",'color':"#FFFFFF"})
+
             }
         });
 
