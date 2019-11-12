@@ -1,11 +1,7 @@
 package cn.cnic.xiandao.controller;
 
 
-import cn.cnic.xiandao.model.Employee;
 import cn.cnic.xiandao.model.ResultVO;
-import cn.cnic.xiandao.service.impl.BaseServiceImpl;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.mysql.cj.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,10 +19,6 @@ public class LogonController {
 
     @Autowired
     private HttpServletRequest httpServletRequest;
-
-    @Autowired
-    BaseServiceImpl<BaseMapper<Employee>,Employee> service;
-
 
     @GetMapping("/login")
     public String getLogin(){
@@ -51,7 +43,6 @@ public class LogonController {
         String password = map.get("password").toString();
         if("admin".equals(userName) && "123456".equals(password) ){
             build.setCode(0);
-
             return build;
         }
         if("许会鹏".equals(userName) && "123456".equals(password)){

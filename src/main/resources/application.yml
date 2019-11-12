@@ -47,8 +47,6 @@ spring:
         cacheServerConfiguration: true
         elideSetAutoCommits: true
         maintainTimeStats: false
-
-
 mybatis-plus:
   mapper-locations: classpath:mapper/*Mapper.xml
   global-config:
