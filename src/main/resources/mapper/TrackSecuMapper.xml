@@ -26,16 +26,6 @@
     delete from track_secu
     where secuId = #{secuid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="cn.cnic.xiandao.model.TrackSecu">
-    insert into track_secu (secuId, secuCode, secuName, 
-      frequency, remark, createUser, 
-      createTime, updateUser, updateTime
-      )
-    values (#{secuid,jdbcType=INTEGER}, #{secucode,jdbcType=VARCHAR}, #{secuname,jdbcType=VARCHAR}, 
-      #{frequency,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{createuser,jdbcType=VARCHAR}, 
-      #{createtime,jdbcType=TIMESTAMP}, #{updateuser,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}
-      )
-  </insert>
   <insert id="insertSelective" parameterType="cn.cnic.xiandao.model.TrackSecu">
     insert into track_secu
     <trim prefix="(" suffix=")" suffixOverrides=",">

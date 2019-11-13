@@ -2,11 +2,11 @@ package cn.cnic.xiandao.mapper;
 
 
 import cn.cnic.xiandao.model.TrackSecu;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
-public interface TrackSecuMapper {
+public interface TrackSecuMapper extends BaseMapper<TrackSecu> {
+
     int deleteByPrimaryKey(Integer secuid);
-
-    int insert(TrackSecu record);
 
     int insertSelective(TrackSecu record);
 

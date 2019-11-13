@@ -16,16 +16,16 @@ layui.use(['element', 'table', 'form', 'jquery', 'laydate'], function () {
         });
 
         table.render({
-            elem: '#tableId',
-            url: '../data/securityincidents.json',
+            elem: '#earlyWarningTab',
+            url: '../loophole/list',
             limit: 10,
             page: true,
             cols: [[
                 {type: 'checkbox'},
-                {field: 'createTime', title: '事件时间'},
-                {field: 'bugname', title: '事件名称'},
+                {field: 'createtime', title: '事件时间'},
+                {field: 'secuname', title: '事件名称',width: 320},
                 {field: 'bugtext', title: '漏洞简述',width: 200},
-                {field: 'num', title: '异常次数'},
+                {field: 'frequency', title: '异常次数'},
                 {field: 'level', title: '严重等级'},
                 {field: 'from', title: '来源'},
                 {field: 'status', title: '状态', templet: '#statusTpl', align: 'center'},

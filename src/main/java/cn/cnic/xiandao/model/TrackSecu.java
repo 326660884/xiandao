@@ -1,8 +1,15 @@
 package cn.cnic.xiandao.model;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+
 import java.util.Date;
 
+@TableName("track_secu")
 public class TrackSecu {
+
+    @TableId(value = "secuId",type = IdType.AUTO)
     private Integer secuid;
 
     private String secucode;

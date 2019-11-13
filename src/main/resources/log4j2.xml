@@ -60,7 +60,7 @@
         <AsyncLogger name="org.crown" level="info" includeLocation="true"/>
         <AsyncLogger name="cn.cnic.xiandao.framework.P6spyLogFormat" level="debug" includeLocation="true"/>
         <!--AsyncRoot-->
-        <AsyncRoot level="debug" includeLocation="true">
+        <AsyncRoot level="INFO" includeLocation="true">
             <appender-ref ref="CONSOLE"/>
             <appender-ref ref="INFO_LOG"/>
             <appender-ref ref="ERROR_LOG"/>
