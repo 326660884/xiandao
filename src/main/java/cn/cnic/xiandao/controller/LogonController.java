@@ -49,6 +49,7 @@ public class LogonController {
             build.setCode(0);
             return build;
         }
+        httpServletRequest.getSession().setAttribute("username",userName);
         build.setCode(-1);
         build.setMsg("账号或者密码错误");
         return  build;

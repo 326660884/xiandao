@@ -44,11 +44,32 @@
 </script>
 <!--模板-->
 <script type="text/html" id="statusTpl">
-    {{ d.status === 0 ? '完成' : '待通知' }}
+    {{# if(d.statusCode === 0 ){           }}
+    <button type="button" class="layui-btn layui-btn-xs layui-btn-radius layui-btn-primary">待通知</button>
+    {{#  } else if (d.statusCode ===  1){  }}
+    <button type="button" class="layui-btn layui-btn-xs layui-btn-radius layui-btn-warm">待检查</button>
+    {{#  } else if (d.statusCode ===  2 ){ }}
+    <button type="button" class="layui-btn layui-btn-xs layui-btn-radius layui-btn-warm">待检查</button>
+    {{#  } else if (d.statusCode ===  9 ){ }}
+    人工移除
+    {{#  } else {                          }}
+    {{ d.statusCode }}
+    {{#  } }}
 </script>
 <script type="text/html" id="operationTpl">
+    {{# if(d.statusCode === 9 ){           }}
+    <i class="layui-icon">&#x1007;</i>无法操作
+    {{# } else if(d.statusCode === 0 ){           }}
     <a href="javascript:;" title="通报" lay-event="edit"><i class="layui-icon">&#xe642;</i>通报</a>
     <a href="javascript:;" title="移除" lay-event="del"><i class="layui-icon">&#xe640;</i>移除</a>
+    {{#  } else if (d.statusCode ===  1){  }}
+    <a href="javascript:;" title="验证" lay-event="test"><i class="layui-icon">&#xe605;</i>验证</a>
+    {{#  } else if (d.statusCode ===  2 ){ }}
+    <a href="javascript:;" title="查看在线报告" lay-event="selectOne"><i class="layui-icon">&#x1006;</i>查看在线报告</a>
+    {{#  } else {                          }}
+    <i class="layui-icon">&#xe702;</i>无法操作
+    {{#  } }}
+
 </script>
 </body>
 </html>

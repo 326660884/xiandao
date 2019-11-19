@@ -3,7 +3,7 @@
 <mapper namespace="cn.cnic.xiandao.mapper.TrackSecuMapper">
   <resultMap id="BaseResultMap" type="cn.cnic.xiandao.model.TrackSecu">
     <id column="secuId" jdbcType="INTEGER" property="secuid" />
-    <result column="secuCode" jdbcType="VARCHAR" property="secucode" />
+    <result column="status_code" jdbcType="INTEGER" property="statusCode" />
     <result column="secuName" jdbcType="VARCHAR" property="secuname" />
     <result column="frequency" jdbcType="INTEGER" property="frequency" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
@@ -11,10 +11,11 @@
     <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
     <result column="updateUser" jdbcType="VARCHAR" property="updateuser" />
     <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="is_del" jdbcType="VARCHAR" property="isDel" />
   </resultMap>
   <sql id="Base_Column_List">
-    secuId, secuCode, secuName, frequency, remark, createUser, createTime, updateUser, 
-    updateTime
+    secuId, status_code, secuName, frequency, remark, createUser, createTime, updateUser, 
+    updateTime, is_del
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -26,14 +27,15 @@
     delete from track_secu
     where secuId = #{secuid,jdbcType=INTEGER}
   </delete>
+
   <insert id="insertSelective" parameterType="cn.cnic.xiandao.model.TrackSecu">
     insert into track_secu
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="secuid != null">
         secuId,
       </if>
-      <if test="secucode != null">
-        secuCode,
+      <if test="statusCode != null">
+        status_code,
       </if>
       <if test="secuname != null">
         secuName,
@@ -56,13 +58,16 @@
       <if test="updatetime != null">
         updateTime,
       </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="secuid != null">
         #{secuid,jdbcType=INTEGER},
       </if>
-      <if test="secucode != null">
-        #{secucode,jdbcType=VARCHAR},
+      <if test="statusCode != null">
+        #{statusCode,jdbcType=CHAR},
       </if>
       <if test="secuname != null">
         #{secuname,jdbcType=VARCHAR},
@@ -85,13 +90,16 @@
       <if test="updatetime != null">
         #{updatetime,jdbcType=TIMESTAMP},
       </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="cn.cnic.xiandao.model.TrackSecu">
     update track_secu
     <set>
-      <if test="secucode != null">
-        secuCode = #{secucode,jdbcType=VARCHAR},
+      <if test="statusCode != null">
+        status_code = #{statusCode,jdbcType=CHAR},
       </if>
       <if test="secuname != null">
         secuName = #{secuname,jdbcType=VARCHAR},
@@ -114,19 +122,10 @@
       <if test="updatetime != null">
         updateTime = #{updatetime,jdbcType=TIMESTAMP},
       </if>
+      <if test="isDel != null">
+        is_del = #{isDel,jdbcType=VARCHAR},
+      </if>
     </set>
-    where secuId = #{secuid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="cn.cnic.xiandao.model.TrackSecu">
-    update track_secu
-    set secuCode = #{secucode,jdbcType=VARCHAR},
-      secuName = #{secuname,jdbcType=VARCHAR},
-      frequency = #{frequency,jdbcType=INTEGER},
-      remark = #{remark,jdbcType=VARCHAR},
-      createUser = #{createuser,jdbcType=VARCHAR},
-      createTime = #{createtime,jdbcType=TIMESTAMP},
-      updateUser = #{updateuser,jdbcType=VARCHAR},
-      updateTime = #{updatetime,jdbcType=TIMESTAMP}
     where secuId = #{secuid,jdbcType=INTEGER}
   </update>
 </mapper>

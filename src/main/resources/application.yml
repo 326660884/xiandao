@@ -6,6 +6,10 @@ server:
     context-path: /xd
 
 spring:
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
   jackson:
     time-zone: GMT+8
     serialization:

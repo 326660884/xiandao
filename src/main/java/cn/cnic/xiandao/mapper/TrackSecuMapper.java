@@ -14,5 +14,4 @@ public interface TrackSecuMapper extends BaseMapper<TrackSecu> {
 
     int updateByPrimaryKeySelective(TrackSecu record);
 
-    int updateByPrimaryKey(TrackSecu record);
 }
