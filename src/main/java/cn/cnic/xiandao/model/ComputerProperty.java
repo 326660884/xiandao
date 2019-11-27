@@ -9,15 +9,21 @@ public class ComputerProperty {
 
     private String mac;
 
-    private Integer state;
-
     private Integer role;
 
     private String roleName;
 
-    private Integer phone;
+    private String phone;
 
-    private Date createtime;
+    private Date createTime;
+
+    private Integer status;
+
+    private Integer safetyDataCount;
+
+    private Integer loopholeDataCount;
+
+    private String assetType;
 
     public Integer getId() {
         return id;
@@ -43,14 +49,6 @@ public class ComputerProperty {
         this.mac = mac == null ? null : mac.trim();
     }
 
-    public Integer getState() {
-        return state;
-    }
-
-    public void setState(Integer state) {
-        this.state = state;
-    }
-
     public Integer getRole() {
         return role;
     }
@@ -67,19 +65,51 @@ public class ComputerProperty {
         this.roleName = roleName == null ? null : roleName.trim();
     }
 
-    public Integer getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Integer phone) {
-        this.phone = phone;
+    public void setPhone(String phone) {
+        this.phone = phone == null ? null : phone.trim();
     }
 
-    public Date getCreatetime() {
-        return createtime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreatetime(Date createtime) {
-        this.createtime = createtime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Integer getSafetyDataCount() {
+        return safetyDataCount;
+    }
+
+    public void setSafetyDataCount(Integer safetyDataCount) {
+        this.safetyDataCount = safetyDataCount;
+    }
+
+    public Integer getLoopholeDataCount() {
+        return loopholeDataCount;
+    }
+
+    public void setLoopholeDataCount(Integer loopholeDataCount) {
+        this.loopholeDataCount = loopholeDataCount;
+    }
+
+    public String getAssetType() {
+        return assetType;
+    }
+
+    public void setAssetType(String assetType) {
+        this.assetType = assetType == null ? null : assetType.trim();
     }
 }

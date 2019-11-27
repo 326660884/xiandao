@@ -29,6 +29,10 @@ public class TrackSecu {
 
     private String isDel;
 
+    private String ip;
+
+    private String source;
+
     public Integer getSecuid() {
         return secuid;
     }
@@ -107,5 +111,21 @@ public class TrackSecu {
 
     public void setIsDel(String isDel) {
         this.isDel = isDel == null ? null : isDel.trim();
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
     }
 }

@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -67,5 +68,24 @@ public class LoopholeServiceImpl extends ServiceImpl<TrackSecuMapper, TrackSecu>
         trackSecu.setUpdatetime(new Date());
         int i = baseMapper.updateById(trackSecu);//更新状态
         return i == insert ?1:-1;
+    }
+
+    /**
+     * 验证成功
+     * @param map
+     * @return
+     */
+    public int solve(Map<String, Object> map) {
+        TrackSecu trackSecu = new TrackSecu();
+        trackSecu.setStatusCode(2);
+
+        QueryWrapper<TrackSecu> condition =  new QueryWrapper<>();
+        condition.eq("secuid",map.get("secuid"));
+        condition.eq("status_code",map.get("statusCode"));
+        return baseMapper.update(trackSecu,condition);
+    }
+
+    public TrackSecuHistoryMapper getHistoryMapper() {
+        return historyMapper;
     }
 }

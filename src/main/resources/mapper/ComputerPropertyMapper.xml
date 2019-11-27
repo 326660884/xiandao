@@ -5,14 +5,18 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="ip" jdbcType="VARCHAR" property="ip" />
     <result column="mac" jdbcType="VARCHAR" property="mac" />
-    <result column="state" jdbcType="INTEGER" property="state" />
     <result column="role" jdbcType="INTEGER" property="role" />
     <result column="role_name" jdbcType="VARCHAR" property="roleName" />
-    <result column="phone" jdbcType="INTEGER" property="phone" />
-    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="safety_data_count" jdbcType="INTEGER" property="safetyDataCount" />
+    <result column="loophole_data_count" jdbcType="INTEGER" property="loopholeDataCount" />
+    <result column="asset_type" jdbcType="VARCHAR" property="assetType" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, ip, mac, state, role, role_name, phone, createtime
+    id, ip, mac, role, role_name, phone, create_time, status, safety_data_count, loophole_data_count, 
+    asset_type
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -24,14 +28,7 @@
     delete from computer_property
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="cn.cnic.xiandao.model.ComputerProperty">
-    insert into computer_property (id, ip, mac, 
-      state, role, role_name, 
-      phone, createtime)
-    values (#{id,jdbcType=INTEGER}, #{ip,jdbcType=VARCHAR}, #{mac,jdbcType=VARCHAR}, 
-      #{state,jdbcType=INTEGER}, #{role,jdbcType=INTEGER}, #{roleName,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP})
-  </insert>
+
   <insert id="insertSelective" parameterType="cn.cnic.xiandao.model.ComputerProperty">
     insert into computer_property
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -44,9 +41,6 @@
       <if test="mac != null">
         mac,
       </if>
-      <if test="state != null">
-        state,
-      </if>
       <if test="role != null">
         role,
       </if>
@@ -56,8 +50,20 @@
       <if test="phone != null">
         phone,
       </if>
-      <if test="createtime != null">
-        createtime,
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="safetyDataCount != null">
+        safety_data_count,
+      </if>
+      <if test="loopholeDataCount != null">
+        loophole_data_count,
+      </if>
+      <if test="assetType != null">
+        asset_type,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -70,9 +76,6 @@
       <if test="mac != null">
         #{mac,jdbcType=VARCHAR},
       </if>
-      <if test="state != null">
-        #{state,jdbcType=INTEGER},
-      </if>
       <if test="role != null">
         #{role,jdbcType=INTEGER},
       </if>
@@ -80,10 +83,22 @@
         #{roleName,jdbcType=VARCHAR},
       </if>
       <if test="phone != null">
-        #{phone,jdbcType=INTEGER},
+        #{phone,jdbcType=VARCHAR},
       </if>
-      <if test="createtime != null">
-        #{createtime,jdbcType=TIMESTAMP},
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="safetyDataCount != null">
+        #{safetyDataCount,jdbcType=INTEGER},
+      </if>
+      <if test="loopholeDataCount != null">
+        #{loopholeDataCount,jdbcType=INTEGER},
+      </if>
+      <if test="assetType != null">
+        #{assetType,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -96,9 +111,6 @@
       <if test="mac != null">
         mac = #{mac,jdbcType=VARCHAR},
       </if>
-      <if test="state != null">
-        state = #{state,jdbcType=INTEGER},
-      </if>
       <if test="role != null">
         role = #{role,jdbcType=INTEGER},
       </if>
@@ -106,10 +118,22 @@
         role_name = #{roleName,jdbcType=VARCHAR},
       </if>
       <if test="phone != null">
-        phone = #{phone,jdbcType=INTEGER},
+        phone = #{phone,jdbcType=VARCHAR},
       </if>
-      <if test="createtime != null">
-        createtime = #{createtime,jdbcType=TIMESTAMP},
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="safetyDataCount != null">
+        safety_data_count = #{safetyDataCount,jdbcType=INTEGER},
+      </if>
+      <if test="loopholeDataCount != null">
+        loophole_data_count = #{loopholeDataCount,jdbcType=INTEGER},
+      </if>
+      <if test="assetType != null">
+        asset_type = #{assetType,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -118,11 +142,14 @@
     update computer_property
     set ip = #{ip,jdbcType=VARCHAR},
       mac = #{mac,jdbcType=VARCHAR},
-      state = #{state,jdbcType=INTEGER},
       role = #{role,jdbcType=INTEGER},
       role_name = #{roleName,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=INTEGER},
-      createtime = #{createtime,jdbcType=TIMESTAMP}
+      phone = #{phone,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      safety_data_count = #{safetyDataCount,jdbcType=INTEGER},
+      loophole_data_count = #{loopholeDataCount,jdbcType=INTEGER},
+      asset_type = #{assetType,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

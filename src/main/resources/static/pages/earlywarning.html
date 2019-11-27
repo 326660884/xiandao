@@ -49,7 +49,7 @@
     {{#  } else if (d.statusCode ===  1){  }}
     <button type="button" class="layui-btn layui-btn-xs layui-btn-radius layui-btn-warm">待检查</button>
     {{#  } else if (d.statusCode ===  2 ){ }}
-    <button type="button" class="layui-btn layui-btn-xs layui-btn-radius layui-btn-warm">待检查</button>
+    <i class="layui-icon" style="color:#009688">&#xe672;</i>
     {{#  } else if (d.statusCode ===  9 ){ }}
     人工移除
     {{#  } else {                          }}
@@ -65,7 +65,7 @@
     {{#  } else if (d.statusCode ===  1){  }}
     <a href="javascript:;" title="验证" lay-event="test"><i class="layui-icon">&#xe605;</i>验证</a>
     {{#  } else if (d.statusCode ===  2 ){ }}
-    <a href="javascript:;" title="查看在线报告" lay-event="selectOne"><i class="layui-icon">&#x1006;</i>查看在线报告</a>
+    <a href="javascript:;" title="查看在线报告" lay-event="selectOne" style="color:#009688">查看在线报告</a>
     {{#  } else {                          }}
     <i class="layui-icon">&#xe702;</i>无法操作
     {{#  } }}

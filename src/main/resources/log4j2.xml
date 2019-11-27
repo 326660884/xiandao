@@ -13,7 +13,7 @@
         <Property name="LOG_DATEFORMAT_PATTERN">yyyy-MM-dd HH:mm:ss.SSS</Property>
         <Property name="CONSOLE_LOG_PATTERN">%clr{${LOG_LEVEL_PATTERN}} %clr{%d{${LOG_DATEFORMAT_PATTERN}}}{faint} %clr{${sys:PID}}{magenta} %clr{%F:%L}{cyan} %clr{-}{faint} %m%n${sys:LOG_EXCEPTION_CONVERSION_WORD}
         </Property>
-        <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %F:%L - %m%n"/>
+        <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level %t %m%n"/>
     </properties>
     <Appenders>
         <!--console-->
@@ -56,8 +56,8 @@
         </RollingRandomAccessFile>
     </Appenders>
     <Loggers>
-        <!--AsyncLogger-->
-        <AsyncLogger name="org.crown" level="info" includeLocation="true"/>
+
+
         <AsyncLogger name="cn.cnic.xiandao.framework.P6spyLogFormat" level="debug" includeLocation="true"/>
         <!--AsyncRoot-->
         <AsyncRoot level="INFO" includeLocation="true">

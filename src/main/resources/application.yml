@@ -51,6 +51,14 @@ spring:
         cacheServerConfiguration: true
         elideSetAutoCommits: true
         maintainTimeStats: false
+  thymeleaf:
+    mode: HTML5
+    encodeing: UTF-8
+    cache: false
+    servlet:
+      content-typ: text/html
+    prefix: classpath:/templates/
+
 mybatis-plus:
   mapper-locations: classpath:mapper/*Mapper.xml
   global-config:
