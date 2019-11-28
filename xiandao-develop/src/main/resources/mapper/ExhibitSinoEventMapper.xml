@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.cnic.xiandao.mapper.ExhibitSinoEventMapper">
+  <resultMap id="BaseResultMap" type="cn.cnic.xiandao.model.ExhibitSinoEvent">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="eventNo" jdbcType="VARCHAR" property="eventno" />
+    <result column="eventName" jdbcType="VARCHAR" property="eventname" />
+    <result column="eventType" jdbcType="VARCHAR" property="eventtype" />
+    <result column="eventLevel" jdbcType="VARCHAR" property="eventlevel" />
+    <result column="agreement" jdbcType="VARCHAR" property="agreement" />
+    <result column="sIp" jdbcType="VARCHAR" property="sip" />
+    <result column="sPort" jdbcType="VARCHAR" property="sport" />
+    <result column="sIpName" jdbcType="VARCHAR" property="sipname" />
+    <result column="sIpAbbr" jdbcType="VARCHAR" property="sipabbr" />
+    <result column="aIp" jdbcType="VARCHAR" property="aip" />
+    <result column="aPort" jdbcType="VARCHAR" property="aport" />
+    <result column="aIpName" jdbcType="VARCHAR" property="aipname" />
+    <result column="aIpAbbr" jdbcType="VARCHAR" property="aipabbr" />
+    <result column="eventFrom" jdbcType="VARCHAR" property="eventfrom" />
+    <result column="eventFqcy" jdbcType="INTEGER" property="eventfqcy" />
+    <result column="ascription" jdbcType="VARCHAR" property="ascription" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="handlePer" jdbcType="VARCHAR" property="handleper" />
+    <result column="noticeEmail" jdbcType="VARCHAR" property="noticeemail" />
+    <result column="noticeUnit" jdbcType="VARCHAR" property="noticeunit" />
+    <result column="noticePer" jdbcType="VARCHAR" property="noticeper" />
+    <result column="dateTime" jdbcType="TIMESTAMP" property="datetime" />
+    <result column="toUser" jdbcType="VARCHAR" property="touser" />
+    <result column="ccUser" jdbcType="VARCHAR" property="ccuser" />
+    <result column="subject" jdbcType="VARCHAR" property="subject" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.cnic.xiandao.model.ExhibitSinoEventWithBLOBs">
+    <result column="whois" jdbcType="LONGVARCHAR" property="whois" />
+    <result column="sendHtml" jdbcType="LONGVARCHAR" property="sendhtml" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, eventNo, eventName, eventType, eventLevel, agreement, sIp, sPort, sIpName, sIpAbbr, 
+    aIp, aPort, aIpName, aIpAbbr, eventFrom, eventFqcy, ascription, status, handlePer, 
+    noticeEmail, noticeUnit, noticePer, dateTime, toUser, ccUser, subject
+  </sql>
+  <sql id="Blob_Column_List">
+    whois, sendHtml
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from exhibit_sino_event
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from exhibit_sino_event
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="cn.cnic.xiandao.model.ExhibitSinoEventWithBLOBs">
+    insert into exhibit_sino_event (id, eventNo, eventName, 
+      eventType, eventLevel, agreement, 
+      sIp, sPort, sIpName, 
+      sIpAbbr, aIp, aPort, 
+      aIpName, aIpAbbr, eventFrom, 
+      eventFqcy, ascription, status, 
+      handlePer, noticeEmail, noticeUnit, 
+      noticePer, dateTime, toUser, 
+      ccUser, subject, whois, 
+      sendHtml)
+    values (#{id,jdbcType=INTEGER}, #{eventno,jdbcType=VARCHAR}, #{eventname,jdbcType=VARCHAR}, 
+      #{eventtype,jdbcType=VARCHAR}, #{eventlevel,jdbcType=VARCHAR}, #{agreement,jdbcType=VARCHAR}, 
+      #{sip,jdbcType=VARCHAR}, #{sport,jdbcType=VARCHAR}, #{sipname,jdbcType=VARCHAR}, 
+      #{sipabbr,jdbcType=VARCHAR}, #{aip,jdbcType=VARCHAR}, #{aport,jdbcType=VARCHAR}, 
+      #{aipname,jdbcType=VARCHAR}, #{aipabbr,jdbcType=VARCHAR}, #{eventfrom,jdbcType=VARCHAR}, 
+      #{eventfqcy,jdbcType=INTEGER}, #{ascription,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{handleper,jdbcType=VARCHAR}, #{noticeemail,jdbcType=VARCHAR}, #{noticeunit,jdbcType=VARCHAR}, 
+      #{noticeper,jdbcType=VARCHAR}, #{datetime,jdbcType=TIMESTAMP}, #{touser,jdbcType=VARCHAR}, 
+      #{ccuser,jdbcType=VARCHAR}, #{subject,jdbcType=VARCHAR}, #{whois,jdbcType=LONGVARCHAR}, 
+      #{sendhtml,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.cnic.xiandao.model.ExhibitSinoEventWithBLOBs">
+    insert into exhibit_sino_event
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="eventno != null">
+        eventNo,
+      </if>
+      <if test="eventname != null">
+        eventName,
+      </if>
+      <if test="eventtype != null">
+        eventType,
+      </if>
+      <if test="eventlevel != null">
+        eventLevel,
+      </if>
+      <if test="agreement != null">
+        agreement,
+      </if>
+      <if test="sip != null">
+        sIp,
+      </if>
+      <if test="sport != null">
+        sPort,
+      </if>
+      <if test="sipname != null">
+        sIpName,
+      </if>
+      <if test="sipabbr != null">
+        sIpAbbr,
+      </if>
+      <if test="aip != null">
+        aIp,
+      </if>
+      <if test="aport != null">
+        aPort,
+      </if>
+      <if test="aipname != null">
+        aIpName,
+      </if>
+      <if test="aipabbr != null">
+        aIpAbbr,
+      </if>
+      <if test="eventfrom != null">
+        eventFrom,
+      </if>
+      <if test="eventfqcy != null">
+        eventFqcy,
+      </if>
+      <if test="ascription != null">
+        ascription,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="handleper != null">
+        handlePer,
+      </if>
+      <if test="noticeemail != null">
+        noticeEmail,
+      </if>
+      <if test="noticeunit != null">
+        noticeUnit,
+      </if>
+      <if test="noticeper != null">
+        noticePer,
+      </if>
+      <if test="datetime != null">
+        dateTime,
+      </if>
+      <if test="touser != null">
+        toUser,
+      </if>
+      <if test="ccuser != null">
+        ccUser,
+      </if>
+      <if test="subject != null">
+        subject,
+      </if>
+      <if test="whois != null">
+        whois,
+      </if>
+      <if test="sendhtml != null">
+        sendHtml,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="eventno != null">
+        #{eventno,jdbcType=VARCHAR},
+      </if>
+      <if test="eventname != null">
+        #{eventname,jdbcType=VARCHAR},
+      </if>
+      <if test="eventtype != null">
+        #{eventtype,jdbcType=VARCHAR},
+      </if>
+      <if test="eventlevel != null">
+        #{eventlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="agreement != null">
+        #{agreement,jdbcType=VARCHAR},
+      </if>
+      <if test="sip != null">
+        #{sip,jdbcType=VARCHAR},
+      </if>
+      <if test="sport != null">
+        #{sport,jdbcType=VARCHAR},
+      </if>
+      <if test="sipname != null">
+        #{sipname,jdbcType=VARCHAR},
+      </if>
+      <if test="sipabbr != null">
+        #{sipabbr,jdbcType=VARCHAR},
+      </if>
+      <if test="aip != null">
+        #{aip,jdbcType=VARCHAR},
+      </if>
+      <if test="aport != null">
+        #{aport,jdbcType=VARCHAR},
+      </if>
+      <if test="aipname != null">
+        #{aipname,jdbcType=VARCHAR},
+      </if>
+      <if test="aipabbr != null">
+        #{aipabbr,jdbcType=VARCHAR},
+      </if>
+      <if test="eventfrom != null">
+        #{eventfrom,jdbcType=VARCHAR},
+      </if>
+      <if test="eventfqcy != null">
+        #{eventfqcy,jdbcType=INTEGER},
+      </if>
+      <if test="ascription != null">
+        #{ascription,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="handleper != null">
+        #{handleper,jdbcType=VARCHAR},
+      </if>
+      <if test="noticeemail != null">
+        #{noticeemail,jdbcType=VARCHAR},
+      </if>
+      <if test="noticeunit != null">
+        #{noticeunit,jdbcType=VARCHAR},
+      </if>
+      <if test="noticeper != null">
+        #{noticeper,jdbcType=VARCHAR},
+      </if>
+      <if test="datetime != null">
+        #{datetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="touser != null">
+        #{touser,jdbcType=VARCHAR},
+      </if>
+      <if test="ccuser != null">
+        #{ccuser,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null">
+        #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="whois != null">
+        #{whois,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sendhtml != null">
+        #{sendhtml,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.cnic.xiandao.model.ExhibitSinoEventWithBLOBs">
+    update exhibit_sino_event
+    <set>
+      <if test="eventno != null">
+        eventNo = #{eventno,jdbcType=VARCHAR},
+      </if>
+      <if test="eventname != null">
+        eventName = #{eventname,jdbcType=VARCHAR},
+      </if>
+      <if test="eventtype != null">
+        eventType = #{eventtype,jdbcType=VARCHAR},
+      </if>
+      <if test="eventlevel != null">
+        eventLevel = #{eventlevel,jdbcType=VARCHAR},
+      </if>
+      <if test="agreement != null">
+        agreement = #{agreement,jdbcType=VARCHAR},
+      </if>
+      <if test="sip != null">
+        sIp = #{sip,jdbcType=VARCHAR},
+      </if>
+      <if test="sport != null">
+        sPort = #{sport,jdbcType=VARCHAR},
+      </if>
+      <if test="sipname != null">
+        sIpName = #{sipname,jdbcType=VARCHAR},
+      </if>
+      <if test="sipabbr != null">
+        sIpAbbr = #{sipabbr,jdbcType=VARCHAR},
+      </if>
+      <if test="aip != null">
+        aIp = #{aip,jdbcType=VARCHAR},
+      </if>
+      <if test="aport != null">
+        aPort = #{aport,jdbcType=VARCHAR},
+      </if>
+      <if test="aipname != null">
+        aIpName = #{aipname,jdbcType=VARCHAR},
+      </if>
+      <if test="aipabbr != null">
+        aIpAbbr = #{aipabbr,jdbcType=VARCHAR},
+      </if>
+      <if test="eventfrom != null">
+        eventFrom = #{eventfrom,jdbcType=VARCHAR},
+      </if>
+      <if test="eventfqcy != null">
+        eventFqcy = #{eventfqcy,jdbcType=INTEGER},
+      </if>
+      <if test="ascription != null">
+        ascription = #{ascription,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="handleper != null">
+        handlePer = #{handleper,jdbcType=VARCHAR},
+      </if>
+      <if test="noticeemail != null">
+        noticeEmail = #{noticeemail,jdbcType=VARCHAR},
+      </if>
+      <if test="noticeunit != null">
+        noticeUnit = #{noticeunit,jdbcType=VARCHAR},
+      </if>
+      <if test="noticeper != null">
+        noticePer = #{noticeper,jdbcType=VARCHAR},
+      </if>
+      <if test="datetime != null">
+        dateTime = #{datetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="touser != null">
+        toUser = #{touser,jdbcType=VARCHAR},
+      </if>
+      <if test="ccuser != null">
+        ccUser = #{ccuser,jdbcType=VARCHAR},
+      </if>
+      <if test="subject != null">
+        subject = #{subject,jdbcType=VARCHAR},
+      </if>
+      <if test="whois != null">
+        whois = #{whois,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sendhtml != null">
+        sendHtml = #{sendhtml,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.cnic.xiandao.model.ExhibitSinoEventWithBLOBs">
+    update exhibit_sino_event
+    set eventNo = #{eventno,jdbcType=VARCHAR},
+      eventName = #{eventname,jdbcType=VARCHAR},
+      eventType = #{eventtype,jdbcType=VARCHAR},
+      eventLevel = #{eventlevel,jdbcType=VARCHAR},
+      agreement = #{agreement,jdbcType=VARCHAR},
+      sIp = #{sip,jdbcType=VARCHAR},
+      sPort = #{sport,jdbcType=VARCHAR},
+      sIpName = #{sipname,jdbcType=VARCHAR},
+      sIpAbbr = #{sipabbr,jdbcType=VARCHAR},
+      aIp = #{aip,jdbcType=VARCHAR},
+      aPort = #{aport,jdbcType=VARCHAR},
+      aIpName = #{aipname,jdbcType=VARCHAR},
+      aIpAbbr = #{aipabbr,jdbcType=VARCHAR},
+      eventFrom = #{eventfrom,jdbcType=VARCHAR},
+      eventFqcy = #{eventfqcy,jdbcType=INTEGER},
+      ascription = #{ascription,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      handlePer = #{handleper,jdbcType=VARCHAR},
+      noticeEmail = #{noticeemail,jdbcType=VARCHAR},
+      noticeUnit = #{noticeunit,jdbcType=VARCHAR},
+      noticePer = #{noticeper,jdbcType=VARCHAR},
+      dateTime = #{datetime,jdbcType=TIMESTAMP},
+      toUser = #{touser,jdbcType=VARCHAR},
+      ccUser = #{ccuser,jdbcType=VARCHAR},
+      subject = #{subject,jdbcType=VARCHAR},
+      whois = #{whois,jdbcType=LONGVARCHAR},
+      sendHtml = #{sendhtml,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.cnic.xiandao.model.ExhibitSinoEvent">
+    update exhibit_sino_event
+    set eventNo = #{eventno,jdbcType=VARCHAR},
+      eventName = #{eventname,jdbcType=VARCHAR},
+      eventType = #{eventtype,jdbcType=VARCHAR},
+      eventLevel = #{eventlevel,jdbcType=VARCHAR},
+      agreement = #{agreement,jdbcType=VARCHAR},
+      sIp = #{sip,jdbcType=VARCHAR},
+      sPort = #{sport,jdbcType=VARCHAR},
+      sIpName = #{sipname,jdbcType=VARCHAR},
+      sIpAbbr = #{sipabbr,jdbcType=VARCHAR},
+      aIp = #{aip,jdbcType=VARCHAR},
+      aPort = #{aport,jdbcType=VARCHAR},
+      aIpName = #{aipname,jdbcType=VARCHAR},
+      aIpAbbr = #{aipabbr,jdbcType=VARCHAR},
+      eventFrom = #{eventfrom,jdbcType=VARCHAR},
+      eventFqcy = #{eventfqcy,jdbcType=INTEGER},
+      ascription = #{ascription,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      handlePer = #{handleper,jdbcType=VARCHAR},
+      noticeEmail = #{noticeemail,jdbcType=VARCHAR},
+      noticeUnit = #{noticeunit,jdbcType=VARCHAR},
+      noticePer = #{noticeper,jdbcType=VARCHAR},
+      dateTime = #{datetime,jdbcType=TIMESTAMP},
+      toUser = #{touser,jdbcType=VARCHAR},
+      ccUser = #{ccuser,jdbcType=VARCHAR},
+      subject = #{subject,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+
+</mapper>
