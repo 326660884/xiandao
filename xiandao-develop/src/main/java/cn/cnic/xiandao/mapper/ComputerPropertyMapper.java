@@ -1,12 +1,11 @@
 package cn.cnic.xiandao.mapper;
 
-
 import cn.cnic.xiandao.model.ComputerProperty;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
-public interface ComputerPropertyMapper {
+public interface ComputerPropertyMapper extends BaseMapper<ComputerProperty> {
+
     int deleteByPrimaryKey(Integer id);
-
-    int insert(ComputerProperty record);
 
     int insertSelective(ComputerProperty record);
 
@@ -15,6 +14,4 @@ public interface ComputerPropertyMapper {
     int updateByPrimaryKeySelective(ComputerProperty record);
 
     int updateByPrimaryKey(ComputerProperty record);
-
-
 }

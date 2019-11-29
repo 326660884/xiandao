@@ -3,13 +3,8 @@ package cn.cnic.xiandao.mapper;
 
 import cn.cnic.xiandao.model.ExhibitSinoEvent;
 import cn.cnic.xiandao.model.ExhibitSinoEventWithBLOBs;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import org.apache.ibatis.annotations.Select;
 
-import java.util.Map;
-
-public interface ExhibitSinoEventMapper extends BaseMapper<ExhibitSinoEvent> {
+public interface ExhibitSinoEventMapper {
     int deleteByPrimaryKey(Integer id);
 
     int insert(ExhibitSinoEventWithBLOBs record);
@@ -23,10 +18,4 @@ public interface ExhibitSinoEventMapper extends BaseMapper<ExhibitSinoEvent> {
     int updateByPrimaryKeyWithBLOBs(ExhibitSinoEventWithBLOBs record);
 
     int updateByPrimaryKey(ExhibitSinoEvent record);
-
-    @Select("select * from exhibit_sino_event LEFT JOIN notice_people ON exhibit_sino_event.id = notice_people.eid ;")
-    int selectWithNoticePeople(Page<Map<String,Object>> page);
-
-
-
 }

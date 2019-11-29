@@ -6,7 +6,11 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+<<<<<<< HEAD:xiandao-develop/src/test/java/MyJDBC.java
 /**
+=======
+
+>>>>>>> f6d5910ea7277fb33786a5dd921932996f2d92a3:src/test/java/MyJDBC.java
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = XianDaoMain.class)
 

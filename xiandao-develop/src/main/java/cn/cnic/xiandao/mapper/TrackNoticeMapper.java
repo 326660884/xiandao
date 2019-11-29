@@ -2,9 +2,8 @@ package cn.cnic.xiandao.mapper;
 
 
 import cn.cnic.xiandao.model.TrackNotice;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
-public interface TrackNoticeMapper extends BaseMapper<TrackNotice> {
+public interface TrackNoticeMapper {
     int deleteByPrimaryKey(Integer id);
 
     int insert(TrackNotice record);

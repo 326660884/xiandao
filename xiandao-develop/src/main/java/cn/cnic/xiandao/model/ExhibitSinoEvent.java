@@ -1,16 +1,8 @@
 package cn.cnic.xiandao.model;
 
-
-
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-
 import java.util.Date;
 
-@TableName("exhibit_sino_event")
-public class ExhibitSinoEvent  {
-    @TableId(value = "id",type = IdType.AUTO)
+public class ExhibitSinoEvent {
     private Integer id;
 
     private String eventno;
@@ -20,7 +12,6 @@ public class ExhibitSinoEvent  {
     private String eventtype;
 
     private String eventlevel;
-
 
     private String agreement;
 
@@ -46,7 +37,7 @@ public class ExhibitSinoEvent  {
 
     private String ascription;
 
-    private Integer status;
+    private String status;
 
     private String handleper;
 
@@ -63,14 +54,6 @@ public class ExhibitSinoEvent  {
     private String ccuser;
 
     private String subject;
-
-    private Date noticetime;
-
-    private String noticemethod;
-
-    private String describeevent;
-
-    private Date resolvetime;
 
     public Integer getId() {
         return id;
@@ -208,12 +191,12 @@ public class ExhibitSinoEvent  {
         this.ascription = ascription == null ? null : ascription.trim();
     }
 
-    public Integer getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status == null ? null : status;
+    public void setStatus(String status) {
+        this.status = status == null ? null : status.trim();
     }
 
     public String getHandleper() {
@@ -278,37 +261,5 @@ public class ExhibitSinoEvent  {
 
     public void setSubject(String subject) {
         this.subject = subject == null ? null : subject.trim();
-    }
-
-    public Date getNoticetime() {
-        return noticetime;
-    }
-
-    public void setNoticetime(Date noticetime) {
-        this.noticetime = noticetime;
-    }
-
-    public String getNoticemethod() {
-        return noticemethod;
-    }
-
-    public void setNoticemethod(String noticemethod) {
-        this.noticemethod = noticemethod;
-    }
-
-    public String getDescribeevent() {
-        return describeevent;
-    }
-
-    public void setDescribeevent(String describeevent) {
-        this.describeevent = describeevent;
-    }
-
-    public Date getResolvetime() {
-        return resolvetime;
-    }
-
-    public void setResolvetime(Date resolvetime) {
-        this.resolvetime = resolvetime;
     }
 }

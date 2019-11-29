@@ -7,10 +7,11 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.util.Date;
 @TableName("track_secu")
 public class TrackSecu {
-    @TableId(value = "secuId",type = IdType.AUTO)
+
+    @TableId(type = IdType.AUTO)
     private Integer secuid;
 
-    private String secucode;
+    private Integer statusCode;
 
     private String secuname;
 
@@ -26,6 +27,12 @@ public class TrackSecu {
 
     private Date updatetime;
 
+    private String isDel;
+
+    private String ip;
+
+    private String source;
+
     public Integer getSecuid() {
         return secuid;
     }
@@ -34,12 +41,12 @@ public class TrackSecu {
         this.secuid = secuid;
     }
 
-    public String getSecucode() {
-        return secucode;
+    public Integer getStatusCode() {
+        return statusCode;
     }
 
-    public void setSecucode(String secucode) {
-        this.secucode = secucode == null ? null : secucode.trim();
+    public void setStatusCode(Integer statusCode) {
+        this.statusCode = statusCode ;
     }
 
     public String getSecuname() {
@@ -96,5 +103,29 @@ public class TrackSecu {
 
     public void setUpdatetime(Date updatetime) {
         this.updatetime = updatetime;
+    }
+
+    public String getIsDel() {
+        return isDel;
+    }
+
+    public void setIsDel(String isDel) {
+        this.isDel = isDel == null ? null : isDel.trim();
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
     }
 }
