@@ -39,9 +39,6 @@ public class noticeController {
         SimpleDateFormat sdf1= new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
         SimpleDateFormat sdf2= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         System.out.println(sdf2.format(sdf1.parse(dt)));
-        //java.sql.Date time = new java.sql.Date(noticeTime.getTime());
-        //System.out.println("----------------"+noticeTime);
-        System.out.println(np);
         noticeService.insert(np);
         //修改状态
         sinoEventService.update(sinoEventService.noticeAndmodifyStatus(eid,noticeMethod,describeEvent,sdf2.format(sdf1.parse(dt))));
