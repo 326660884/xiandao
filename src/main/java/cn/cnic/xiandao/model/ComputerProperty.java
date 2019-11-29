@@ -1,8 +1,17 @@
 package cn.cnic.xiandao.model;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.ToString;
+
 import java.util.Date;
 
+@ToString
+@TableName("computer_property")
 public class ComputerProperty {
+
+    @TableId(type=IdType.AUTO)
     private Integer id;
 
     private String ip;
