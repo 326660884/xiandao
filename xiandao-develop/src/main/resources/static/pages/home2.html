@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>先导监控 | 概述首页</title>
+    <!--设置不缓存页面-->
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
+
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+
+    <link rel="stylesheet" href="../css/home.css" media="all"/>
+    <link rel="stylesheet" href="../css/admin.css" media="all"/>
+
+    <script type="text/javascript" src="../lib/echarts/echarts.min.js"></script>
+    <script type="text/javascript" src="../lib/echarts/echarts.theme.js"></script>
+    <script type="text/javascript" src="../lib/echarts/world/js/china.js"></script>
+    <script type="text/javascript" src="../lib/echarts/echarts-liquidfill.min.js"></script>
+</head>
+<body class="childrenBody home">
+	<div class="layui-row layui-card">
+		<div class="layui-card-header">服务器综述</div>	
+		<div class="layui-card-body">
+			<div class="layadmin-backlog">
+				<ul class="layui-row layui-col-space5">
+				  <li class="layui-col-md3">
+					<a  class="layadmin-backlog-body">
+					  <h3>服务器总数量</h3>
+					  <p><cite>66</cite></p>
+					</a>
+				  </li>
+				  <li class="layui-col-md3">
+					<a class="layadmin-backlog-body">
+					  <h3>运行中</h3>
+					  <p><cite>50</cite></p>
+					</a>
+				  </li>
+				  <li class="layui-col-md3">
+					<a  class="layadmin-backlog-body">
+					  <h3>预警</h3>
+					  <p><cite style="color: #FF5722;">4</cite></p>
+					</a>
+				  </li>
+				  <li class="layui-col-md3">
+					<a href="javascript:;" class="layadmin-backlog-body">
+					  <h3>离线</h3>
+					  <p><cite style="color: #393D49;">12</cite></p>
+					</a>
+				  </li>
+				</ul>
+				<ul class="layui-row layui-col-space5">
+					<li class="layui-col-md6">
+						<div id="cpu" class="layadmin-backlog-body" style="height:300px!important;"></div>
+					</li>
+					<li class="layui-col-md6">
+						<div  id="Memory" class="layadmin-backlog-body" style="height: 300px!important;"></div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>	
+<!-- DNS解析总数 -->
+
+<div class="layui-row layui-col-space10">
+	<blockquote class="layui-elem-quote" style="background-color: #FAFAFA;font-size: 18px;">
+	    昨日解析服务情况
+	</blockquote>
+    <div class="layui-col-sm6 layui-col-md3">
+        <div class="layui-card">
+            <div class="layui-card-header">
+                请求解析次数
+                
+            </div>
+            <div class="layui-card-body layuiadmin-card-list">
+                <p class="layuiadmin-big-font">9,999,666</p>
+                <p>
+                    总计访问量
+                    <span class="layuiadmin-span-color">1188万 <i class="layui-inline layui-icon layui-icon-flag"></i></span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="layui-col-sm6 layui-col-md3">
+        <div class="layui-card">
+            <div class="layui-card-header">
+                响应次数
+                
+            </div>
+            <div class="layui-card-body layuiadmin-card-list">
+                <p class="layuiadmin-big-font">9,999,333</p>
+                <p>
+                    总计量
+                    <span class="layuiadmin-span-color">1188万 <i class="layui-inline layui-icon layui-icon-flag"></i></span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="layui-col-sm6 layui-col-md3">
+        <div class="layui-card">
+            <div class="layui-card-header">
+                正常报数数量
+            </div>
+            <div class="layui-card-body layuiadmin-card-list">
+
+                <p class="layuiadmin-big-font">9,999,333</p>
+                <p>
+                    正确比例
+                    <span class="layuiadmin-span-color">99.9%<i class="layui-inline layui-icon layui-icon-face-smile-b"></i></span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="layui-col-sm6 layui-col-md3">
+        <div class="layui-card">
+            <div class="layui-card-header">
+                不合法报文数量
+            </div>
+            <div class="layui-card-body layuiadmin-card-list">
+
+                <p class="layuiadmin-big-font">66,666</p>
+                <p>
+                    最近一个月
+                    <span class="layuiadmin-span-color">0.01% <i class="layui-icon layui-icon-tips" style="color: #CD5C5C;"></i></span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="layui-row layui-col-space10">
+	<blockquote class="layui-elem-quote" style="background-color: #FAFAFA;font-size: 18px;">
+		网络情况
+	</blockquote>
+	<div class="layui-row  layui-col-md12">
+		<div class="layui-card">
+			<div class="layui-card-header">网络运行情况</div>
+			<div class="layui-card-body map-body" >
+				<table id="oneGroup" lay-filter="oneGroup"></table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<script type="text/html" id="statusTpl">
+    <span href="" class="layui-table-link" style="color: #01AAED;" target="_blank">{{ d.status }}</span>
+</script>
+
+</body>
+</html>
+<script type="text/javascript" src="../lib/layui/layui.js"></script>
+<script type="text/javascript" src="../js/analysis.js"></script>
+<script>
+var myChart = echarts.init(document.getElementById('cpu'));
+var value = 0.114
+var data = []
+data.push(value)
+data.push(value)
+data.push(value)
+data.push(value)
+
+var option = {
+
+    title: {
+        text: '集群平均内存占用率',
+        textStyle: {
+            fontWeight: 'normal',
+            fontSize: 25,
+            color: 'rgb(97, 142, 205)'
+        }
+    },
+    series: [{
+        type: 'liquidFill',
+        radius: '80%',
+        data: data,
+
+        label: {
+            normal: {
+                formatter: (value * 100).toFixed(1) + '%',
+                textStyle: {
+                    fontSize: 46
+                }
+            }
+        }
+    }]
+}
+
+myChart.setOption(option, true);
+
+var mChart = echarts.init(document.getElementById('Memory'));
+Moption = {
+    title: {
+        text: '集群平均CPU使用率',
+        textStyle: {
+            fontWeight: 'normal',
+            fontSize: 25,
+            color: 'rgb(97, 142, 205)'
+        }
+    },
+    tooltip : {
+        formatter: "{a} <br/>{b} : {c}%"
+    },
+
+    series: [
+        {
+            name: '内存',
+            type: 'gauge',
+            detail: {formatter:'{value}%'},
+            data: [{value: 5.6, name: '占用率'}]
+        }
+    ]
+};
+
+mChart.setOption(Moption, true);
+
+
+</script>
