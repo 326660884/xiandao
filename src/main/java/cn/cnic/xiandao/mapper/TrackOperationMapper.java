@@ -1,8 +1,9 @@
 package cn.cnic.xiandao.mapper;
 
 import cn.cnic.xiandao.model.TrackOperation;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
-public interface TrackOperationMapper {
+public interface TrackOperationMapper extends BaseMapper<TrackOperation> {
     int deleteByPrimaryKey(Integer id);
 
     int insert(TrackOperation record);

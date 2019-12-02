@@ -17,4 +17,9 @@ public class ResultVO<T> {
 
     private List<T> data;
 
+    public ResultVO(Integer code, String msg, List<T> data) {
+        this.code = code;
+        this.msg = msg;
+        this.data = data;
+    }
 }
