@@ -13,7 +13,18 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-
+/**
+ * notice_people
+ *
+ * request： notice;
+ * function: toRemove
+ * desc: insert data to the notice_people table,
+ * together to update the exhibit_sino_event table ;
+ *
+ * request: togenerator
+ * function: toRemove
+ * desc: query the notice table data;
+ */
 @Controller
 public class noticeController {
 
@@ -25,9 +36,9 @@ public class noticeController {
     //通知
     @ResponseBody
     @RequestMapping("/notice")
-    public String toRemove(String noticeUnit, String noticeMethod, String describeEvent, Integer eid, Date noticeTime) throws ParseException {
-        //插入通报信息
-        System.out.println("获取表单的参数为: " + noticeUnit);
+    public String toRemove(String title, String noticeMethod, String describeEvent, Integer eid, Date noticeTime) throws ParseException {
+        String noticeUnit = title;
+        //notice表插入记录
         NoticePeople np = new NoticePeople();
         np.setNoticemethod(noticeMethod);
         np.setNoticeunit(noticeUnit);
@@ -38,10 +49,9 @@ public class noticeController {
         String dt=noticeTime.toString();
         SimpleDateFormat sdf1= new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
         SimpleDateFormat sdf2= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        System.out.println(sdf2.format(sdf1.parse(dt)));
         noticeService.insert(np);
-        //修改状态
-        sinoEventService.update(sinoEventService.noticeAndmodifyStatus(eid,noticeMethod,describeEvent,sdf2.format(sdf1.parse(dt))));
+        //修改exhibit_sino_event 的相关字段
+        sinoEventService.update(sinoEventService.noticeAndmodifyStatus(eid,noticeUnit,noticeMethod,describeEvent,sdf2.format(sdf1.parse(dt))));
 
 
         return "ok";
@@ -52,12 +62,8 @@ public class noticeController {
     @RequestMapping("/togenerator")
     public String toRemove(Integer eid){
         //查询通报信息
-
-
         QueryWrapper<NoticePeople> queryWrapper = new QueryWrapper<>();
         queryWrapper.select("noticeTime ");
-
-
         return "ok";
     }
 

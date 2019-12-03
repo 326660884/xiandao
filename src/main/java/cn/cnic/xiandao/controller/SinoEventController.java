@@ -15,60 +15,63 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.text.ParseException;
 
+/**
+ * safe event
+ *
+ * request:getSecurityincidentsUsePage
+ * function:getSecurityincidentsUsePage
+ * desc: using the split page for the data of query
+ *
+ * request:remove
+ * function:remove
+ * desc: according to the id ,to update the  status value of the exhibit_sino_event table;
+ *
+ * request:toresolve
+ * function:modifyStatus
+ * desc:according to the id ,to update the  status value of the exhibit_sino_event table;
+ *
+ */
 
 @Controller
 public class SinoEventController {
 
     @Autowired
     SinoEventServiceImpl sinoEventService;
-
     @Autowired
     SinoEventServiceWithNoticePeopleImpl sinoEventServiceWithNoticePeople;
-
     //分页操作
     @ResponseBody()
     @RequestMapping("/getSecurityincidentsUsePage")
     public ResultVOSinoEvent<ExhibitSinoEvent> getSecurityincidentsUsePage(Integer limit, Integer page){
-
-
         Page pageResult = sinoEventService.getSpeciaresultUsePage(page,limit);
         ResultVOSinoEvent<ExhibitSinoEvent> resultVOSinoEvent=
                 new ResultVOSinoEvent<ExhibitSinoEvent>(Integer.valueOf(0),"操作成功",Long.valueOf(pageResult.getTotal()),pageResult.getRecords());
 
         return  resultVOSinoEvent;
     }
-    //分页2操作,暂时没用到
+    //分页操作,暂时没用到，进行多表连接进行分页
     @ResponseBody()
     @RequestMapping("/getSecurityincidentsUsePageWithNotice")
     public ResultVOSinoEvent<ExhibiSinoEventWithNoticePeople> getSecurityincidentsUsePageWithNotice(Integer limit, Integer page){
-
-
         Page pageResult = sinoEventServiceWithNoticePeople.getSpeciaresultUsePage(page,limit);
         ResultVOSinoEvent<ExhibiSinoEventWithNoticePeople> resultVOSinoEvent=
                 new ResultVOSinoEvent<ExhibiSinoEventWithNoticePeople>(Integer.valueOf(0),"操作成功",Long.valueOf(pageResult.getTotal()),pageResult.getRecords());
-
         return  resultVOSinoEvent;
     }
-
-    //移除
+    //移除操作，更新exhibit_sino_event的status字段；
     @RequestMapping("/remove")
     @ResponseBody
     public ResultVO remove(int id) {
-        System.out.println(id);
         sinoEventService.update(sinoEventService.removeConditionWrapper(id));
         ResultVO res = new ResultVO(1,"ok",null);
-        System.out.println(res);
-
         return res;
     }
-    //解决
+    //解决操作，更新exhibit_sino_event的status字段
     @RequestMapping("/toresolve")
     @ResponseBody
     public ResultVO modifyStatus(int id) throws ParseException {
         sinoEventService.update(sinoEventService.modifyStatus(id));
         ResultVO res = new ResultVO(1,"ok",null);
-        System.out.println(res);
-        return res;
+         return res;
     }
-
 }

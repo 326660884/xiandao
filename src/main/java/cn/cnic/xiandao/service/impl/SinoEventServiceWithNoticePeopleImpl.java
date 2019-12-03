@@ -14,10 +14,8 @@ public class SinoEventServiceWithNoticePeopleImpl extends ServiceImpl<ExhibiSino
 
     //分页查询
     public Page getSpeciaresultUsePage (Integer page,Integer limit ){
-
         QueryWrapper<ExhibiSinoEventWithNoticePeople> queryWrapper = new QueryWrapper<>();
         queryWrapper.orderByDesc("id");
-
         queryWrapper.select("id","noticeunit","noticeemail","dateTime","eventName","eventType","eventFqcy","eventLevel","sIpName","status");
         Page<ExhibiSinoEventWithNoticePeople> ipage = new Page<>(page,limit);
         baseMapper.selectPage(ipage,queryWrapper);
@@ -38,8 +36,8 @@ public class SinoEventServiceWithNoticePeopleImpl extends ServiceImpl<ExhibiSino
     public UpdateWrapper<ExhibitSinoEvent> noticeAndmodifyStatus(int id){
         UpdateWrapper<ExhibitSinoEvent> updateWrapper = new UpdateWrapper<>();
         String SQL ="status = 1 where id = " + id;
-        System.out.println(SQL);
         updateWrapper.setSql(true,SQL);
+
         return updateWrapper;
     }
 
@@ -48,9 +46,7 @@ public class SinoEventServiceWithNoticePeopleImpl extends ServiceImpl<ExhibiSino
         //修改exhibitsinoEvent的status状态
         UpdateWrapper<ExhibitSinoEvent> updateWrapper = new UpdateWrapper<>();
         String SQL = "status = 2 where id = " + id;
-        System.out.println(SQL);
         updateWrapper.setSql(true,SQL);
-
 
         return updateWrapper;
     }
