@@ -28,7 +28,7 @@
         <div class="layui-form-item ">
             <label class="layui-form-label">通报单位</label>
             <div class="layui-input-block">
-                <input type="text" name="title" id="noticeUnit"  name="noticeUnit" placeholder="请输入通知对象" required lay-verify="required"  autocomplete="off" class="layui-input">
+                <input  type="text" name="title" id="noticeUnit"  name="noticeUnit" placeholder="请输入通知对象" required lay-verify="required"  autocomplete="off" class="layui-input">
                 <!--<input id="noticeUnit" class="noticeUnit" name="noticeUnit" type="radio"  >-->
             </div>
 
@@ -64,7 +64,7 @@
         </div>
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn" lay-submit lay-filter="modify">立即提交</button>
+                <button id="submitbutton" class="layui-btn" lay-submit lay-filter="modify">立即提交</button>
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
             </div>
         </div>
@@ -73,5 +73,6 @@
 <!--js逻辑-->
 <script src="../lib/layui/layui.js"></script>
 <script src="../js/securityincidents-edit.js"></script>
+
 </body>
 </html>

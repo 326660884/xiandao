@@ -7,6 +7,7 @@ import cn.cnic.xiandao.model.ResultVO;
 import cn.cnic.xiandao.model.ResultVOSinoEvent;
 import cn.cnic.xiandao.service.impl.SinoEventServiceImpl;
 import cn.cnic.xiandao.service.impl.SinoEventServiceWithNoticePeopleImpl;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.text.ParseException;
+import java.util.List;
+import java.util.Map;
 
 /**
  * safe event
@@ -73,5 +76,22 @@ public class SinoEventController {
         sinoEventService.update(sinoEventService.modifyStatus(id));
         ResultVO res = new ResultVO(1,"ok",null);
          return res;
+    }
+
+    @ResponseBody
+    @RequestMapping("/tovalidateUser")
+    public ResultVO tovalidateUser(String notice){
+        QueryWrapper<ExhibitSinoEvent> queryWrapper = new QueryWrapper<>();
+        List<Map<String, Object>> list =  sinoEventService.listMaps(queryWrapper.select("noticeUnit"));
+        ResultVO res = null;
+        for(Map<String,Object> obj : list){
+            String str = obj.values().toString().substring(1,obj.values().toString().length()-1);
+            if(notice.equals(str)){
+                res = new ResultVO<>(1,"ok",null);
+                return res;
+            }
+        }
+        res = new ResultVO(1,"nok",null);
+        return res;
     }
 }
