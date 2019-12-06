@@ -26,7 +26,6 @@ layui.config({
       method: "GET",
       url: "../data/analysis.json",//
       elem: '#oneGroup', //指定原始表格元素选择器（推荐id选择器）
-
       page: false,
       limit: 10,
       parseData: function (res) {
@@ -39,7 +38,8 @@ layui.config({
             o.requsetIPNum =(Math.random() * 1000).toFixed()+1000
             o.domainNum =(Math.random() * 1000).toFixed()+1000
             o.status ='正常'
-            o.netflow =(Math.random() * 10).toFixed()+1+'Mb/s'
+            var f =Math.random()*10
+            o.netflow =f.toFixed(2)+' Mb/s'
             res.data.list.push(o)
         }
 
