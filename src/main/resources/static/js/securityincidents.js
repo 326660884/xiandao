@@ -55,7 +55,7 @@ layui.use(['element', 'table', 'form', 'jquery', 'laydate','util'], function () 
         var data = obj.data;
         var layEvent = obj.event;
         var  notice_target =  data.noticeunit;
-        //console.log(notice_target);
+        console.log(notice_target);
         if (layEvent === 'edit') {
             layer.open({
                 title: '编辑用户',
@@ -73,8 +73,9 @@ layui.use(['element', 'table', 'form', 'jquery', 'laydate','util'], function () 
                     if(notice_target == "undefined" || notice_target == null || notice_target == ""){
                         notice_target = "Anonymous"
                     }
-                    //body.find('#noticeUnit')[0].title= notice_target ;
-                    //body.find('#noticeUnit')[0].value= notice_target;
+
+                    body.find('#noticeUnit')[0].placeholder= notice_target ;
+                    //body.find('#no    ticeUnit')[0].value= notice_target;
                     body.find(".eid")[0].value=data.id;
                     body.find(".eid")[0].title=data.id;
                     body.find(".noticeTime")[0].title = myDate ;
@@ -190,7 +191,6 @@ layui.use(['element', 'table', 'form', 'jquery', 'laydate','util'], function () 
                     body.find("#dispeople")[0].value = data.sipname;
                     body.find("#eventfqcy")[0].value = data.eventfqcy;
                     body.find("#eventtype")[0].value = data.eventtype;
-                    //body.find(".eid")[0].title=data.id;
                     form.render();
 
                 },
