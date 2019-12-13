@@ -1,0 +1,74 @@
+{
+  "code": 0,
+  "msg": "操作成功",
+  "count": 4,
+  "data": [
+    {
+      "id": "001",
+      "ip": "159.168.101.12",
+      "status": 0,
+      "createTime": "2018-05-06 18:15:28",
+      "assetType": "服务器",
+      "safetyDataCount": "213",
+      "loopholeDataCount": "645",
+      "mac": " ‎8C-EC-4A-2A-10-C1",
+      "role": 0,
+      "rolename": "张栋梁",
+      "phone": 15916620013254
+    },
+    {
+      "id": "001",
+      "ip": "159.168.101.12",
+      "status": 0,
+      "createTime": "2018-05-06 18:11:30",
+      "assetType": "安全存储",
+      "safetyDataCount": "574",
+      "loopholeDataCount": "235",
+      "mac": " ‎9S-EC-0B-A2-10-B1",
+      "role": 1,
+      "rolename": "武兵",
+      "phone": 15916620013254
+    },
+    {
+      "id": "002",
+      "ip": "159.168.101.20",
+      "status": 0,
+      "createTime": "2018-05-06 18:19:58",
+      "assetType": "服务器",
+      "safetyDataCount": "12",
+      "loopholeDataCount": "124",
+      "mac": " ‎0A-6C-C3-12-B2-B1",
+      "role": 1,
+      "rolename": "郭凯",
+      "phone": 15916620013254
+    },
+    {
+      "id": "003",
+      "ip": "159.168.101.13",
+      "name": "张三",
+      "status": 0,
+      "createTime": "2018-05-06 18:15:28",
+      "assetType": "云主机",
+      "safetyDataCount": "15",
+      "loopholeDataCount": "346",
+      "mac": " ‎8C-EC-2B-2E-11-E1",
+      "role": 0,
+      "rolename": "张栋梁",
+      "phone": 15916620013254
+    },
+    {
+      "id": "004",
+      "ip": "159.168.101.42",
+      "name": "张三",
+      "status": 0,
+      "createTime": "2018-05-06 18:15:28",
+      "assetType": "云主机",
+      "safetyDataCount": "124",
+      "loopholeDataCount": "14",
+      "mac": " ‎8C-CE-B6-5A-C0-C0",
+      "role": 0,
+      "rolename": "张栋梁",
+      "phone": 15916620013254
+    }
+  ]
+}

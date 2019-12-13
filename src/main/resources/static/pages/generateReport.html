@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!--设置不缓存页面-->
+    <meta http-equiv="Expires" content="0">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="Cache" content="no-cache">
+    <title>生成报表</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../lib/layui/css/layui.css">
+    <link rel="stylesheet" href="../css/scroll-bar.css">
+    <link rel="stylesheet" href="../css/sub-page.css">
+    <link rel="stylesheet" href="../lib/nprogress/nprogress.css">
+</head>
+<body>
+<!--面包屑导航区域-->
+<div class="ok-body-breadcrumb">
+                <span >
+                    <a><cite>首页 /</cite></a>
+                    <a><cite>安全事件分析与处置 /</cite></a>
+                    <a><cite>在线报告查看</cite></a>
+                </span>
+    <a class="layui-btn layui-btn-sm" href="javascript:location.replace(location.href);" title="刷新">
+        <i class="layui-icon layui-icon-refresh"></i>
+    </a>
+</div>
+<ul class="layui-timeline">
+    <li class="layui-timeline-item">
+        <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+        <div class="layui-timeline-content layui-text">
+            <h3 class="layui-timeline-title"><input id="resolveTime" type="text" style="border:none;"></h3>
+            <p><i class="layui-icon " style="color: forestgreen">&#xe6af</i>已解决</p>
+        </div>
+    </li>
+    <li class="layui-timeline-item">
+        <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+        <div class="layui-timeline-content layui-text">
+            <h3 class="layui-timeline-title"><input id="dealTime" type="text"  style="border:none;"></h3>
+            <!--通报单位用户自己写，需要一定的检查，确定单位是否存在 -->
+            <p >通报单位：<input id="noticeunit" type="text" style="border:none;" ></p>
+            <p>邮箱：<input  id="noticeemail" type="text"  style="border:none;"></p>
+            <p>描述信息：<input id="desc" type="text"  style="border:none;"></p>
+        </div>
+    </li>
+    <li class="layui-timeline-item">
+        <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+        <div class="layui-timeline-content layui-text">
+            <h3 class="layui-timeline-title"><input id="discoverTime" type="text"  style="border:none";  ></h3>
+            <p>目标对象： <input id="dispeople" type="text"  style="border:none;"></p>
+            <p>异常次数：<input id="eventfqcy" type="text"  style="border:none;"></p>
+            <p>漏洞名称：<input id="eventtype" type="text"  style="border:none;"></p>
+        </div>
+    </li>
+    <li class="layui-timeline-item">
+        <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+        <div class="layui-timeline-content layui-text">
+            <div class="layui-timeline-title">
+                <i class="layui-icon " style="color: red">&#xe69c</i>发现漏洞
+            </div>
+        </div>
+    </li>
+</ul>
+
+<!--js逻辑-->
+<script src="../lib/layui/layui.js"></script>
+</body>
+</html>

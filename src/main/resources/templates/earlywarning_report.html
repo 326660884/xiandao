@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>在线查看报告</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" th:href="@{/lib/layui/css/layui.css}">
+    <link rel="stylesheet" th:href="@{/css/scroll-bar.css}">
+    <link rel="stylesheet" th:href="@{/css/sub-page.css}">
+    <link rel="stylesheet" th:href="@{//at.alicdn.com/t/font_693759_wytlyqhtdtj1nhfr.css}">
+</head>
+<body>
+<div class="ok-body">
+    <!--面包屑导航区域-->
+    <div class="ok-body-breadcrumb">
+            <span class="layui-breadcrumb">
+                <a><cite>首页</cite></a>
+                <a><cite>通报预警</cite></a>
+                <a><cite>在线报告查看</cite></a>
+
+            </span>
+        <a class="layui-btn layui-btn-sm" href="javascript:location.replace(location.href);" title="刷新">
+            <i class="layui-icon layui-icon-refresh"></i>
+        </a>
+    </div>
+    <div class="layui-container ok-form">
+        <ul class="layui-timeline">
+            <li class="layui-timeline-item">
+                <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                <div class="layui-timeline-content layui-text">
+                    <h3 class="layui-timeline-title"  th:text="${#dates.format(t.updatetime, 'yyyy-MM-dd HH:mm')}" ></h3>
+                    <p><i class="layui-icon layui-icon-face-smile" style="font-size: 24px; color:#01AAED;"></i>已经解决</p>
+
+                </div>
+            </li>
+            <li class="layui-timeline-item">
+                <i class="layui-icon layui-timeline-axis" >&#xe63f;</i>
+                <div class="layui-timeline-content layui-text">
+                    <h3 class="layui-timeline-title" th:text="${#dates.format(h.createdate,'yyyy-MM-dd HH:mm')}" ></h3>
+                    <p th:text="'通报人：'+ ${h.notifiedPerson}" ></p>
+                    <span th:switch="${h.ways}">
+                        <p th:case="0" >邮件地址：<span th:text="${h.email}"/></p>
+                        <p th:case="1">手机号：<span th:text="${h.phone}"/></p>
+                        <p th:case="2"><span></span></p>
+                        <p th:case="*">没有匹配成功的数据！</p>
+                    </span>
+                    <p th:text="${h.remarks}"/>
+                </div>
+            </li>
+            <li class="layui-timeline-item">
+                <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                <div class="layui-timeline-content layui-text">
+                    <h3 class="layui-timeline-title" th:text="${#dates.format(t.createtime, 'yyyy-MM-dd HH:mm')}"></h3>
+                    <p th:text="'发现人：' + ${t.createuser}"/>
+                    <p th:text="'异常次数：' + ${t.frequency}"/>
+                    <p th:text="'漏洞名称：' + ${t.secuname}"/>
+                    <p th:text="${t.remark}"/>
+                </div>
+            </li>
+            <li class="layui-timeline-item">
+                <i class="layui-icon layui-timeline-axis">&#xe63f;</i>
+                <div class="layui-timeline-content layui-text">
+                    <div class="layui-timeline-title"> <i class="layui-icon layui-icon-face-surprised" style="font-size: 24px; color: #FF5722;"></i>发现漏洞</div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+<script th:src="@{/lib/layui/layui.js}"></script>
+<script th:src="@{/js/earlywarning-edit.js}"></script>
+</html>
