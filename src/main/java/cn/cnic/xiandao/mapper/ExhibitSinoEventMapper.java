@@ -3,8 +3,9 @@ package cn.cnic.xiandao.mapper;
 
 import cn.cnic.xiandao.model.ExhibitSinoEvent;
 import cn.cnic.xiandao.model.ExhibitSinoEventWithBLOBs;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
-public interface ExhibitSinoEventMapper {
+public interface ExhibitSinoEventMapper extends BaseMapper<ExhibitSinoEvent> {
     int deleteByPrimaryKey(Integer id);
 
     int insert(ExhibitSinoEventWithBLOBs record);

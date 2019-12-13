@@ -2,8 +2,9 @@ package cn.cnic.xiandao.mapper;
 
 
 import cn.cnic.xiandao.model.TrackUser;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
-public interface TrackUserMapper {
+public interface TrackUserMapper extends BaseMapper<TrackUser> {
     int deleteByPrimaryKey(Integer userid);
 
     int insert(TrackUser record);
