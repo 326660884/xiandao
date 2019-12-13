@@ -1,6 +1,8 @@
 package cn.cnic.xiandao.controller;
 
 import cn.cnic.xiandao.model.NoticePeople;
+import cn.cnic.xiandao.service.impl.BroadcastNotice;
+import cn.cnic.xiandao.service.impl.EmailNotice;
 import cn.cnic.xiandao.service.impl.NoticeServiceImpl;
 import cn.cnic.xiandao.service.impl.SinoEventServiceImpl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -34,10 +37,16 @@ public class noticeController {
 
     @Autowired
     SinoEventServiceImpl sinoEventService;
+
+    @Autowired
+    EmailNotice emailnotice;
+
+    @Autowired
+    BroadcastNotice broadcastNotice;
     //通知
     @ResponseBody
     @RequestMapping("/notice")
-    public String toRemove(String title, String noticeMethod, String describeEvent, Integer eid, Date noticeTime) throws ParseException {
+    public String toRemove(String title, String noticeMethod, String describeEvent, Integer eid, Date noticeTime,String noticeEmail) throws ParseException {
         String noticeUnit = title;
         //notice表插入记录
         NoticePeople np = new NoticePeople();
@@ -53,6 +62,19 @@ public class noticeController {
         noticeService.insert(np);
         //修改exhibit_sino_event 的相关字段
         sinoEventService.update(sinoEventService.noticeAndmodifyStatus(eid,noticeUnit,noticeMethod,describeEvent,sdf2.format(sdf1.parse(dt))));
+
+        if(noticeMethod.equals("021")){
+            try {
+                System.out.println("starting send email ... " + noticeEmail) ;
+                emailnotice.constructMail(noticeUnit,noticeEmail,describeEvent);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        if(noticeMethod.equals("0571")){
+            System.out.println("send the broadcase");
+            broadcastNotice.send(describeEvent);
+        }
 
 
         return "ok";

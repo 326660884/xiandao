@@ -80,6 +80,8 @@ layui.use(['element', 'table', 'form', 'jquery', 'laydate','util'], function () 
                     body.find(".eid")[0].title=data.id;
                     body.find(".noticeTime")[0].title = myDate ;
                     body.find(".noticeTime")[0].value=myDate ;
+                    body.find(".noticeEmail")[0].value=data.noticeemail;
+
                     form.render();
                 },
                 end: function () {

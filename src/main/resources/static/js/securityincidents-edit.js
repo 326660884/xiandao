@@ -21,7 +21,6 @@ layui.use(['element', 'form', 'jquery', 'laydate','layer'], function () {
             success: function (res) {
                 if(res.msg === "nok"){
                     layer.alert("通知对象不存在");
-
                     $("#submitbutton").attr("class","layui-btn layui-btn-disabled");
                 }else{
                     $("#submitbutton").attr("class","layui-btn");
