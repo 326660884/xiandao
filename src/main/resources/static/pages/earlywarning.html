@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>安全事件</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../lib/layui/css/layui.css">
+    <link rel="stylesheet" href="../css/scroll-bar.css">
+    <link rel="stylesheet" href="../css/sub-page.css">
+    <link rel="stylesheet" href="../lib/nprogress/nprogress.css">
+</head>
+<body>
+<div class="ok-body">
+    <!--面包屑导航区域-->
+    <div class="ok-body-breadcrumb">
+        <span class="layui-breadcrumb">
+            <a><cite>首页</cite></a>
+            <a><cite>安全事件</cite></a>
+        </span>
+        <a class="layui-btn layui-btn-sm" href="javascript:location.replace(location.href);" title="刷新">
+            <i class="layui-icon layui-icon-refresh"></i>
+        </a>
+    </div>
+    <!--工具栏-->
+    <okToolbar>
+        <button class="layui-btn layui-btn-normal" id="batchEnabled">
+            <i class="iconfont icon-shangsheng"></i>批量处置
+        </button>
+        <span>共有数据：<i id="countNum"></i>条</span>
+    </okToolbar>
+    <!--数据表格-->
+    <table class="layui-hide" id="earlyWarningTab" lay-filter="tableFilter"></table>
+</div>
+<!--js逻辑-->
+<script src="../lib/layui/layui.js"></script>
+<script src="../lib/nprogress/nprogress.js"></script>
+<script src="../js/earlywarning.js"></script>
+<script>
+    NProgress.start();
+    window.onload = function () {
+        NProgress.done();
+    }
+
+</script>
+<!--模板-->
+<script type="text/html" id="statusTpl">
+    {{# if(d.statusCode === 0 ){           }}
+    <button type="button" class="layui-btn layui-btn-xs layui-btn-radius layui-btn-primary">待通知</button>
+    {{#  } else if (d.statusCode ===  1){  }}
+    <button type="button" class="layui-btn layui-btn-xs layui-btn-radius layui-btn-warm">待检查</button>
+    {{#  } else if (d.statusCode ===  2 ){ }}
+    <i class="layui-icon" style="color:#009688">&#xe672;</i>
+    {{#  } else if (d.statusCode ===  9 ){ }}
+    人工移除
+    {{#  } else {                          }}
+    {{ d.statusCode }}
+    {{#  } }}
+</script>
+<script type="text/html" id="operationTpl">
+    {{# if(d.statusCode === 9 ){           }}
+    <i class="layui-icon">&#x1007;</i>无法操作
+    {{# } else if(d.statusCode === 0 ){           }}
+    <a href="javascript:;" title="通报" lay-event="edit"><i class="layui-icon">&#xe642;</i>通报</a>
+    <a href="javascript:;" title="移除" lay-event="del"><i class="layui-icon">&#xe640;</i>移除</a>
+    {{#  } else if (d.statusCode ===  1){  }}
+    <a href="javascript:;" title="验证" lay-event="test"><i class="layui-icon">&#xe605;</i>验证</a>
+    {{#  } else if (d.statusCode ===  2 ){ }}
+    <a href="javascript:;" title="查看在线报告" lay-event="selectOne" style="color:#009688">查看在线报告</a>
+    {{#  } else {                          }}
+    <i class="layui-icon">&#xe702;</i>无法操作
+    {{#  } }}
+
+</script>
+</body>
+</html>
