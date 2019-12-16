@@ -1,10 +1,68 @@
-layui.use(['element', 'table', 'form', 'jquery', 'laydate','util'], function () {
+layui.use(['layer','element', 'table', 'form', 'jquery', 'laydate','util'], function () {
     var element = layui.element;
     var table = layui.table;
     var form = layui.form;
     var $ = layui.jquery;
     var laydate = layui.laydate;
     var util = layui.util;
+    var layer= layui.layer;
+
+    $.post('http://localhost:8080/xd/getbroadcast',
+        {
+            name: "username",
+            ifRead: 0
+        },
+        function(str){
+            layer.open({
+                type: 1
+                ,title: "广播通知"
+                ,closeBtn: false
+                ,area: '300px;'
+                ,shade: 0.8
+                ,id: 'broadcastNotice'
+                ,btn: ['已读', '后期在看']
+                ,btnAlign: 'c'
+                ,moveType: 1
+                ,content:'<div class="bro" style="padding: 50px; line-height: 22px;'+
+                    'background-color: #393D49;color: #fff;font-weight: 300";>' +
+                    '通知人：<li id="noticePeople" value="123" title="234" ></li><br/>'+
+                    '通知内容：<li id="noticeConetent"></li>' +
+                    '</div>'
+                ,
+                error: function () {
+                    alert("出现错误");
+                    return false;
+                }
+                ,success: function(layero){
+                    var newdiv= layero.find('.bro')
+                    newdiv.find('#noticePeople').attr({
+                        value: "2"
+                    });
+                }
+            });
+        });
+
+    /**
+    layer.open({
+        type: 2
+        ,title: "广播通知"
+        ,closeBtn: false
+        ,area: '300px;'
+        ,shade: 0.8
+        ,id: 'broadcastNotice'
+        ,btn: ['已读', '后期在看']
+        ,btnAlign: 'c'
+        ,moveType: 1
+        ,content:'http://localhost:8080/xd/pages/broadcastNoticeShow.html'
+        ,success: function(layero){
+           var newdiv= layero.find('.bro')
+            newdiv.find('#noticePeople').attr({
+                value: "2"
+            });
+        }
+    });
+ **/
+
     laydate.render({
         elem: '#startTime',
         type: "datetime"
@@ -22,7 +80,6 @@ layui.use(['element', 'table', 'form', 'jquery', 'laydate','util'], function () 
         page: true,
         cols: [[
             {type: 'checkbox'},
-
             {field: 'id' ,title: '事件编号',hide:true},
             {field: 'noticeunit' ,title: '通知单位',hide:true},
             {field: 'noticeemail' ,title: '通知邮件',hide:true},
@@ -288,4 +345,10 @@ layui.use(['element', 'table', 'form', 'jquery', 'laydate','util'], function () 
             }
         });
     })
+
+
+
+
+
+
 })

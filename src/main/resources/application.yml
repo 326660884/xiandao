@@ -6,6 +6,10 @@ server:
     context-path: /xd
 
 spring:
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
   jackson:
     time-zone: GMT+8
     serialization:
@@ -47,17 +51,22 @@ spring:
         cacheServerConfiguration: true
         elideSetAutoCommits: true
         maintainTimeStats: false
-  devtools:
-    restart:
-      enabled: true
-  freemarker:
+  thymeleaf:
+    mode: HTML5
+    encodeing: UTF-8
     cache: false
+    servlet:
+      content-typ: text/html
+    prefix: classpath:/templates/
 mybatis-plus:
   mapper-locations: classpath:mapper/*Mapper.xml
   global-config:
     db-config:
-      id-type: auto
       field-strategy: not_empty
+      id-type: auto
       db-type: mysql
+    banner: false
+   # super-mapper-class: org.crown.framework.mapper.BaseMapper
+  #type-enums-package: org.crown.enums
   type-aliases-package: cn.cnic.xiandao.model
 

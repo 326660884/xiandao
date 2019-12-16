@@ -1,7 +1,8 @@
 package cn.cnic.xiandao.controller;
 
 import cn.cnic.xiandao.model.NoticePeople;
-import cn.cnic.xiandao.service.impl.BroadcastNotice;
+import cn.cnic.xiandao.model.ResultVO;
+import cn.cnic.xiandao.service.impl.BroadcastNoticeImp;
 import cn.cnic.xiandao.service.impl.EmailNotice;
 import cn.cnic.xiandao.service.impl.NoticeServiceImpl;
 import cn.cnic.xiandao.service.impl.SinoEventServiceImpl;
@@ -42,7 +43,8 @@ public class noticeController {
     EmailNotice emailnotice;
 
     @Autowired
-    BroadcastNotice broadcastNotice;
+    BroadcastNoticeImp broadcastNoticeImp;
+
     //通知
     @ResponseBody
     @RequestMapping("/notice")
@@ -73,10 +75,8 @@ public class noticeController {
         }
         if(noticeMethod.equals("0571")){
             System.out.println("send the broadcase");
-            broadcastNotice.send(describeEvent);
+            broadcastNoticeImp.SendBrocast(describeEvent);
         }
-
-
         return "ok";
     }
 
@@ -90,6 +90,13 @@ public class noticeController {
         return "ok";
     }
 
+    @ResponseBody
+    @RequestMapping("/getbroadcast")
+    public String getBroadcast(){
+        System.out.println("get brocast notice");
+        ResultVO res = new ResultVO(1,"ok",null);
+        return "ok";
+    }
 
 
 
