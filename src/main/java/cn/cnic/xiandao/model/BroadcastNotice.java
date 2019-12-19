@@ -7,6 +7,7 @@ import lombok.Data;
 
 import java.util.Date;
 
+
 @Data
 @TableName("broadcast_notice")
 public class BroadcastNotice {
@@ -27,4 +28,9 @@ public class BroadcastNotice {
         this.readtime = readTime;
     }
 
+    public BroadcastNotice(int id, String username,String noticecontent) {
+        this.id = id;
+        this.username = username;
+        this.noticecontent = noticecontent;
+    }
 }

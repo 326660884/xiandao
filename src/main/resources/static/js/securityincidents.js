@@ -6,62 +6,73 @@ layui.use(['layer','element', 'table', 'form', 'jquery', 'laydate','util'], func
     var laydate = layui.laydate;
     var util = layui.util;
     var layer= layui.layer;
+    var arrayindex = 0;
+
 
     $.post('http://localhost:8080/xd/getbroadcast',
         {
-            name: "username",
-            ifRead: 0
+            name: "wanglingyue@cnic.cn",
         },
-        function(str){
+        function(res){
+            var that = this;
             layer.open({
-                type: 1
+                 type: 1
                 ,title: "广播通知"
                 ,closeBtn: false
                 ,area: '300px;'
                 ,shade: 0.8
+                ,offset: [ //为了演示，随机坐标
+                    Math.random()*($(window).height()-300)
+                    ,Math.random()*($(window).width()-390)
+                ]
                 ,id: 'broadcastNotice'
-                ,btn: ['已读', '后期在看']
                 ,btnAlign: 'c'
                 ,moveType: 1
+                ,zIndex: layer.zIndex //重点1
                 ,content:'<div class="bro" style="padding: 50px; line-height: 22px;'+
                     'background-color: #393D49;color: #fff;font-weight: 300";>' +
-                    '通知人：<li id="noticePeople" value="123" title="234" ></li><br/>'+
-                    '通知内容：<li id="noticeConetent"></li>' +
+                    '通知人：<input type="text" id="noticePeople"   autocomplete="off" class="layui-input " style="background-color: transparent ;border: 0px;color: #e4e7ed" disabled><br/>'+
+                    '通知内容：<input type="text" id="noticeConetent"   autocomplete="off" class="layui-input " style="background-color: transparent ;border: 0px;color: #e4e7ed" disabled><br/>'+
                     '</div>'
-                ,
-                error: function () {
-                    alert("出现错误");
-                    return false;
+                ,btn: ['已读，下一个','全部关闭']
+                ,yes: function(){
+                     arrayindex++;
+                     console.log(arrayindex)
+                     $(that).click();
+                }
+                ,btn2: function(){
+                     layer.closeAll();
                 }
                 ,success: function(layero){
-                    var newdiv= layero.find('.bro')
-                    newdiv.find('#noticePeople').attr({
-                        value: "2"
-                    });
-                }
+                    var arrays=res.data;
+                    console.log(arrayindex)
+                    if(arrays.length != 0) {
+                        console.log(res.data);
+                        var newdiv= layero.find('.bro');
+
+                        newdiv.find('#noticePeople').attr({
+                            value: res.data[arrayindex].username,
+                            title: res.data[arrayindex].username,
+                            placeholder: res.data[arrayindex].username
+                        });
+                        newdiv.find('#noticeConetent').attr({
+                            value: res.data[arrayindex].noticecontent,
+                            title: res.data[arrayindex].noticecontent,
+                            placeholder: res.data[arrayindex].username
+                        });
+                        layer.setTop(layero); //重点2
+                    }else{
+                          layer.closeAll();
+                    }
+                    }
+                    ,error: function () {
+                        alert("出现错误");
+                        return false;
+                    }
             });
         });
 
-    /**
-    layer.open({
-        type: 2
-        ,title: "广播通知"
-        ,closeBtn: false
-        ,area: '300px;'
-        ,shade: 0.8
-        ,id: 'broadcastNotice'
-        ,btn: ['已读', '后期在看']
-        ,btnAlign: 'c'
-        ,moveType: 1
-        ,content:'http://localhost:8080/xd/pages/broadcastNoticeShow.html'
-        ,success: function(layero){
-           var newdiv= layero.find('.bro')
-            newdiv.find('#noticePeople').attr({
-                value: "2"
-            });
-        }
-    });
- **/
+
 
     laydate.render({
         elem: '#startTime',
@@ -88,8 +99,8 @@ layui.use(['layer','element', 'table', 'form', 'jquery', 'laydate','util'], func
             {field: 'noticemethod' ,title: '通知方法',hide:true},
             {field: 'describeevent' ,title: '描述信息',hide:true},
             {field: 'datetime', title: '事件时间',width:180,templet: function(d){
-                    return util.toDateString(d.datetime,'yyyy-MM-dd HH:mm')
-                }},
+                return util.toDateString(d.datetime,'yyyy-MM-dd HH:mm')
+            }},
             {field: 'eventname', title: '事件名称',width:100},
             {field: 'eventtype', title: '漏洞简述',width: 100},
             {field: 'eventfqcy', title: '异常次数',width:100},

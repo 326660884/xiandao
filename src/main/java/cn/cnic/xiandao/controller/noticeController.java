@@ -1,5 +1,6 @@
 package cn.cnic.xiandao.controller;
 
+import cn.cnic.xiandao.model.BroadcastNotice;
 import cn.cnic.xiandao.model.NoticePeople;
 import cn.cnic.xiandao.model.ResultVO;
 import cn.cnic.xiandao.service.impl.BroadcastNoticeImp;
@@ -16,6 +17,7 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 /**
@@ -92,10 +94,19 @@ public class noticeController {
 
     @ResponseBody
     @RequestMapping("/getbroadcast")
-    public String getBroadcast(){
+    public ResultVO getBroadcast(String name) throws ParseException {
         System.out.println("get brocast notice");
-        ResultVO res = new ResultVO(1,"ok",null);
-        return "ok";
+
+        List<BroadcastNotice> bs=broadcastNoticeImp.getBrocastForUsename(name);
+
+        broadcastNoticeImp.update(broadcastNoticeImp.updateSatusForIfread(name));
+
+        ResultVO res = new ResultVO(1,"ok",bs);
+        for (BroadcastNotice b:
+             bs) {
+            System.out.println(b.getUsername());
+        }
+        return res;
     }
 
 

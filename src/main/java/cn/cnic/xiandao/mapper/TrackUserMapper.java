@@ -22,4 +22,5 @@ public interface TrackUserMapper extends BaseMapper<TrackUser> {
 
     @Select("Select userName from track_user")
     List<String> getAlluser();
+
 }
