@@ -89,7 +89,7 @@ layui.use(['layer','element', 'table', 'form', 'jquery', 'laydate','util'], func
         cols: [[
             {type: 'checkbox'},
             {field: 'id' ,title: '事件编号',hide:true},
-            {field: 'noticeunit' ,title: '通知单位',hide:true},
+            {field: 'aipname' ,title: '被攻击单位',width:300},
             {field: 'noticeemail' ,title: '通知邮件',hide:true},
             {field: 'noticetime',title: '通知时间',hide:true,templet: '#transNoticetime'},
             {field: 'resolvetime',title: '解决时间',hide:true,templet:'#transresolvetime'},
@@ -119,7 +119,8 @@ layui.use(['layer','element', 'table', 'form', 'jquery', 'laydate','util'], func
     table.on('tool(tableFilter)', function (obj) {
         var data = obj.data;
         var layEvent = obj.event;
-        var  notice_target =  data.noticeunit;
+        var  notice_target =  data.aipname;
+        console.log("obj",obj);
         console.log(notice_target);
         if (layEvent === 'edit') {
             layer.open({
@@ -137,8 +138,7 @@ layui.use(['layer','element', 'table', 'form', 'jquery', 'laydate','util'], func
                     if(notice_target == "undefined" || notice_target == null || notice_target == ""){
                         notice_target = "Anonymous"
                     }
-
-                    body.find('#noticeUnit')[0].placeholder= notice_target ;
+                    body.find('#aipname')[0].value= notice_target ;
                     body.find(".eid")[0].value=data.id;
                     body.find(".eid")[0].title=data.id;
                     body.find(".noticeTime")[0].title = myDate ;
@@ -168,8 +168,8 @@ layui.use(['layer','element', 'table', 'form', 'jquery', 'laydate','util'], func
                         success: function (res) {
                             if (res.code === 1) {
                                 layer.msg("操作成功！", {icon: 1, time: 1000}, function () {
-                                    //location.reload;
-                                    table.reload('tableId',{})
+                                    //table.reload('tableId',{})
+                                    location.reload()
                                 })
                             } else {
                                 layer.msg("删除失败"  )
@@ -198,8 +198,8 @@ layui.use(['layer','element', 'table', 'form', 'jquery', 'laydate','util'], func
                         success: function (res) {
                             if (res.code === 1) {
                                 layer.msg("操作成功！", {icon: 1, time: 1000}, function () {
-                                    //location.reload;
-                                    table.reload('tableId',{})
+                                        //table.reload('tableId',{})
+                                        location.reload()
                                 })
                             } else {
                                 layer.msg("解决失败"  )
@@ -223,33 +223,15 @@ layui.use(['layer','element', 'table', 'form', 'jquery', 'laydate','util'], func
                 zIndex: layer.zIndex,
 
                 success: function(layero,index){
-                    $.ajax({
-                        type:"POST",
-                        url:"../togenerator",
-                        dataType:"json",
-                        data:{
-                            id: data.id,
-                        },
-                        success: function (res) {
-                            if (res.code === 1) {
-                                layer.msg("操作成功！", {icon: 1, time: 1000}, function () {
-                                    location.reload;
-                                })
-                            } else {
-                                layer.msg("解决失败"  )
-                            }
-                        },
-                    });
-
                     var body = layer.getChildFrame('body', index);
+
                     var iframeWin = window[layero.find('iframe')[0]['name']];
                     if(notice_target == "undefined" || notice_target == null || notice_target == ""){
                         notice_target = "Anonymous";
                     }
-
                     body.find("#resolveTime")[0].value = data.resolvetime.substring(0,10);
                     body.find("#dealTime")[0].value = data.noticetime.substring(0,10);
-                    body.find("#noticeunit")[0].value = notice_target;
+                    body.find("#aipname")[0].value = data.aipname;
                     body.find("#noticeemail")[0].value = data.noticeemail;
                     body.find("#desc")[0].value = data.describeevent;
                     body.find("#discoverTime")[0].value = data.datetime.substring(0,10);

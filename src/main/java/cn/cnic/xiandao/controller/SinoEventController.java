@@ -82,7 +82,7 @@ public class SinoEventController {
     @RequestMapping("/tovalidateUser")
     public ResultVO tovalidateUser(String notice){
         QueryWrapper<ExhibitSinoEvent> queryWrapper = new QueryWrapper<>();
-        List<Map<String, Object>> list =  sinoEventService.listMaps(queryWrapper.select("noticeUnit"));
+        List<Map<String, Object>> list =  sinoEventService.listMaps(queryWrapper.select("aIpName"));
         ResultVO res = null;
         for(Map<String,Object> obj : list){
             String str = obj.values().toString().substring(1,obj.values().toString().length()-1);

@@ -22,8 +22,10 @@ public class SinoEventServiceImpl extends ServiceImpl<ExhibitSinoEventMapper, Ex
     public Page getSpeciaresultUsePage (Integer page,Integer limit ){
         QueryWrapper<ExhibitSinoEvent> queryWrapper = new QueryWrapper<>();
         queryWrapper.orderByDesc("id");
+        queryWrapper.eq(false ,"aIpName",null);
+//        queryWrapper.isNotNull(true,"aIpName");
         queryWrapper.select("id","noticeunit","noticeemail","dateTime","eventName","eventType","eventFqcy",
-                "eventLevel","sIpName","status","noticetime", "noticemethod", "describeevent","resolvetime");
+                "aIpName","eventLevel","sIpName","status","noticetime", "noticemethod", "describeevent","resolvetime");
         Page<ExhibitSinoEvent> ipage = new Page<>(page,limit);
         baseMapper.selectPage(ipage,queryWrapper);
         return ipage;
@@ -46,9 +48,9 @@ public class SinoEventServiceImpl extends ServiceImpl<ExhibitSinoEventMapper, Ex
         return updateWrapper;
     }
     //edit功能修改status2状态   //注意时间
-    public UpdateWrapper<ExhibitSinoEvent> noticeAndmodifyStatus(int id, String noticeUnit,String noticeMethod,  String describeEvent,String noticeTime) throws ParseException {
+    public UpdateWrapper<ExhibitSinoEvent> noticeAndmodifyStatus(int id, String aIpName,String noticeMethod,  String describeEvent,String noticeTime) throws ParseException {
         UpdateWrapper<ExhibitSinoEvent> updateWrapper = new UpdateWrapper<>();
-        String SQL ="status = 1,noticeUnit='"+noticeUnit + "',noticeMethod='"+noticeMethod+"',describeEvent='"+describeEvent+"',noticeTime='"+ noticeTime + "' where id = " + id;
+        String SQL ="status = 1 ,noticeMethod='"+noticeMethod+"',describeEvent='"+describeEvent+"',noticeTime='"+ noticeTime + "' where id = " + id;
         updateWrapper.setSql(true,SQL);
 
         return updateWrapper;

@@ -11,7 +11,7 @@ layui.use(['element', 'form', 'jquery', 'laydate','layer'], function () {
     });
 
 
-    $("#noticeUnit").blur(function () {
+    $("#aipname").blur(function () {
         var value = $(this).val();
         $.ajax({
             url: "../tovalidateUser",

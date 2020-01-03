@@ -23,7 +23,6 @@ public class BroadcastNoticeImp extends ServiceImpl<BroadcastNoticeMapper,Broadc
     public void SendBrocast(String describeEvent){
         //获取发送对象,查询track_user
         List<String> nameList=trackUser.getAlluser();
-        System.out.println(nameList);
         Date sendTime = new Date();
 
         //进行数据的插入

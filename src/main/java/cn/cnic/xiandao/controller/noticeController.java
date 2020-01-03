@@ -7,7 +7,6 @@ import cn.cnic.xiandao.service.impl.BroadcastNoticeImp;
 import cn.cnic.xiandao.service.impl.EmailNotice;
 import cn.cnic.xiandao.service.impl.NoticeServiceImpl;
 import cn.cnic.xiandao.service.impl.SinoEventServiceImpl;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,11 +54,11 @@ public class noticeController {
     @ResponseBody
     @RequestMapping("/notice")
     public String toRemove(String title, String noticeMethod, String describeEvent, Integer eid, Date noticeTime,String noticeEmail) throws ParseException {
-        String noticeUnit = title;
+        String aIpName = title;
         //notice表插入记录
         NoticePeople np = new NoticePeople();
         np.setNoticemethod(noticeMethod);
-        np.setNoticeunit(noticeUnit);
+        np.setAipname(aIpName);
         np.setDescribeevent(describeEvent);
         np.setEid(eid);
         np.setNoticetime(noticeTime);
@@ -69,30 +68,18 @@ public class noticeController {
         SimpleDateFormat sdf2= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         noticeService.insert(np);
         //修改exhibit_sino_event 的相关字段
-        sinoEventService.update(sinoEventService.noticeAndmodifyStatus(eid,noticeUnit,noticeMethod,describeEvent,sdf2.format(sdf1.parse(dt))));
+        sinoEventService.update(sinoEventService.noticeAndmodifyStatus(eid,aIpName,noticeMethod,describeEvent,sdf2.format(sdf1.parse(dt))));
 
         if(noticeMethod.equals("021")){
             try {
-                System.out.println("starting send email ... " + noticeEmail) ;
-                emailnotice.constructMail(noticeUnit,noticeEmail,describeEvent);
+                emailnotice.constructMail(aIpName,noticeEmail,describeEvent);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
         if(noticeMethod.equals("0571")){
-            System.out.println("send the broadcase");
             broadcastNoticeImp.SendBrocast(describeEvent);
         }
-        return "ok";
-    }
-
-    //通知
-    @ResponseBody
-    @RequestMapping("/togenerator")
-    public String toRemove(Integer eid){
-        //查询通报信息
-        QueryWrapper<NoticePeople> queryWrapper = new QueryWrapper<>();
-        queryWrapper.select("noticeTime ");
         return "ok";
     }
 
