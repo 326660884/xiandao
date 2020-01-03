@@ -55,7 +55,6 @@ public class BroadcastNoticeImp extends ServiceImpl<BroadcastNoticeMapper,Broadc
         SimpleDateFormat sdf1= new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH);
         SimpleDateFormat sdf2= new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String sql = "readTime= '"+ sdf2.format(sdf1.parse(readTime)) + "',ifRead = '"+1+ "' where userName = '"+ username+"'";
-        System.out.println(sql);
         updateWrapper.setSql(true,sql);
 
         return updateWrapper;

@@ -14,7 +14,7 @@ layui.use(['element', 'form', 'jquery', 'laydate','layer'], function () {
     $("#noticeUnit").blur(function () {
         var value = $(this).val();
         $.ajax({
-            url: "http://localhost:8080/xd/tovalidateUser",
+            url: "../tovalidateUser",
             data: {notice : value},
             type:"post",
             dataType:"JSON",
@@ -32,7 +32,7 @@ layui.use(['element', 'form', 'jquery', 'laydate','layer'], function () {
     form.on('submit(modify)', function (data) {
         //console.log(data.field);
         $.ajax({
-            url: "http://localhost:8080/xd/notice",
+            url: "../notice",
             data: data.field,
             success: function(data){
                 layer.msg("编辑成功！", {icon: 6, time: 1000, anim: 4}, function () {

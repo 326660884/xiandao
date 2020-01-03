@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -37,6 +38,9 @@ public class noticeController {
 
     @Autowired
     NoticeServiceImpl noticeService;
+
+    @Autowired
+    private HttpServletRequest httpServletRequest;
 
     @Autowired
     SinoEventServiceImpl sinoEventService;
@@ -94,18 +98,12 @@ public class noticeController {
 
     @ResponseBody
     @RequestMapping("/getbroadcast")
-    public ResultVO getBroadcast(String name) throws ParseException {
-        System.out.println("get brocast notice");
+    public ResultVO getBroadcast() throws ParseException {
 
+        String name =httpServletRequest.getSession().getAttribute("username").toString();
         List<BroadcastNotice> bs=broadcastNoticeImp.getBrocastForUsename(name);
-
         broadcastNoticeImp.update(broadcastNoticeImp.updateSatusForIfread(name));
-
         ResultVO res = new ResultVO(1,"ok",bs);
-        for (BroadcastNotice b:
-             bs) {
-            System.out.println(b.getUsername());
-        }
         return res;
     }
 

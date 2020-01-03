@@ -9,10 +9,7 @@ layui.use(['layer','element', 'table', 'form', 'jquery', 'laydate','util'], func
     var arrayindex = 0;
 
 
-    $.post('http://localhost:8080/xd/getbroadcast',
-        {
-            name: "wanglingyue@cnic.cn",
-        },
+    $.post('../getbroadcast',
         function(res){
             var that = this;
             layer.open({
@@ -86,7 +83,7 @@ layui.use(['layer','element', 'table', 'form', 'jquery', 'laydate','util'], func
 
     table.render({
         elem: '#tableId',
-        url: 'http://localhost:8080/xd/getSecurityincidentsUsePage',
+        url: '../getSecurityincidentsUsePage',
         limit: 10,
         page: true,
         cols: [[
@@ -128,7 +125,6 @@ layui.use(['layer','element', 'table', 'form', 'jquery', 'laydate','util'], func
             layer.open({
                 title: '编辑用户',
                 type: 2,
-                shade: false,
                 maxmin: true,
                 shade: 0.5,
                 area: ['90%', '90%'],
@@ -143,7 +139,6 @@ layui.use(['layer','element', 'table', 'form', 'jquery', 'laydate','util'], func
                     }
 
                     body.find('#noticeUnit')[0].placeholder= notice_target ;
-                    //body.find('#no    ticeUnit')[0].value= notice_target;
                     body.find(".eid")[0].value=data.id;
                     body.find(".eid")[0].title=data.id;
                     body.find(".noticeTime")[0].title = myDate ;
@@ -165,7 +160,7 @@ layui.use(['layer','element', 'table', 'form', 'jquery', 'laydate','util'], func
                 }, function (index) {
                     $.ajax({
                         type: "POST",
-                        url: "http://localhost:8080/xd/remove",
+                        url: "../remove",
                         dataType: "json",
                         data: {
                             id: data.id,
@@ -195,7 +190,7 @@ layui.use(['layer','element', 'table', 'form', 'jquery', 'laydate','util'], func
                 },function (index) {
                     $.ajax({
                         type:"POST",
-                        url:"http://localhost:8080/xd/toresolve",
+                        url:"../toresolve",
                         dataType:"json",
                         data:{
                             id: data.id,
@@ -230,7 +225,7 @@ layui.use(['layer','element', 'table', 'form', 'jquery', 'laydate','util'], func
                 success: function(layero,index){
                     $.ajax({
                         type:"POST",
-                        url:"http://localhost:8080/xd/togenerator",
+                        url:"../togenerator",
                         dataType:"json",
                         data:{
                             id: data.id,
@@ -362,4 +357,4 @@ layui.use(['layer','element', 'table', 'form', 'jquery', 'laydate','util'], func
 
 
 
-})
+});
