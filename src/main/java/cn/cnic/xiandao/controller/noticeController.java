@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -71,11 +70,9 @@ public class noticeController {
         sinoEventService.update(sinoEventService.noticeAndmodifyStatus(eid,aIpName,noticeMethod,describeEvent,sdf2.format(sdf1.parse(dt))));
 
         if(noticeMethod.equals("021")){
-            try {
-                emailnotice.constructMail(aIpName,noticeEmail,describeEvent);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+                System.out.println("邮件通知开始，功能待开发，" + noticeEmail);
+                //邮件通知实现废弃
+                //emailnotice.constructMail(aIpName,noticeEmail,describeEvent);
         }
         if(noticeMethod.equals("0571")){
             broadcastNoticeImp.SendBrocast(describeEvent);
