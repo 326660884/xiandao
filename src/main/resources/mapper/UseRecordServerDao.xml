@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.cnic.security.xiandao.dao.UseRecordServerDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="cn.cnic.security.xiandao.entity.UseRecordServerEntity" id="useRecordServerMap">
+        <result property="uId" column="u_id"/>
+        <result property="createTime" column="create_time"/>
+        <result property="serverName" column="server_name"/>
+        <result property="memory" column="memory"/>
+        <result property="cpuUse" column="cpu_use"/>
+        <result property="responseTime" column="response_time"/>
+        <result property="throughput" column="throughput"/>
+        <result property="queryRate" column="query_rate"/>
+        <result property="diskSpeed" column="disk_speed"/>
+        <result property="bandwidth" column="bandwidth"/>
+    </resultMap>
+
+
+</mapper>
