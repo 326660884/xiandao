@@ -11,7 +11,7 @@ import java.text.SimpleDateFormat;
 @Slf4j
 public class JacksonUtils {
 
-    private static ObjectMapper objectMapper = new ObjectMapper();
+    private static final ObjectMapper objectMapper = new ObjectMapper();
 
     static {
         // 通过该方法对mapper对象进行设置，所有序列化的对象都将按改规则进行系列化
@@ -72,6 +72,7 @@ public class JacksonUtils {
      * @param str
      * @param clazz
      * @param <T>
+     * @return
      */
     public static <T> T string2Obj(String str, Class<T> clazz) {
         if (StringUtils.isEmpty(str) || clazz == null) {

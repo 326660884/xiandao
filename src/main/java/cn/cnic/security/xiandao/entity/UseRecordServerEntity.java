@@ -5,8 +5,6 @@ import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
 import java.util.Date;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 /**
@@ -14,7 +12,7 @@ import lombok.Data;
  * 
  * @author xuhuipeng
  * @email xuhuipeng@cnic.com
- * @date 2020-08-13 18:19:44
+ * @date 2020-08-18 18:26:15
  */
 @Data
 @TableName("use_record_server")
@@ -55,6 +53,10 @@ public class UseRecordServerEntity implements Serializable {
 	 */
 	private Double queryRate;
 	/**
+	 * 硬盘使用率
+	 */
+	private Double diskUse;
+	/**
 	 * 硬盘io
 	 */
 	private Double diskSpeed;
@@ -62,5 +64,17 @@ public class UseRecordServerEntity implements Serializable {
 	 * 带宽
 	 */
 	private Double bandwidth;
+	/**
+	 * 下行流量
+	 */
+	private Double bandwinthDown;
+	/**
+	 * 进程数量
+	 */
+	private Integer processesNumber;
+	/**
+	 * 预警类型
+	 */
+	private String warnType;
 
 }

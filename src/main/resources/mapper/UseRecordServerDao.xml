@@ -3,8 +3,8 @@
 
 <mapper namespace="cn.cnic.security.xiandao.dao.UseRecordServerDao">
 
-	<!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="cn.cnic.security.xiandao.entity.UseRecordServerEntity" id="useRecordServerMap">
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="cn.cnic.security.xiaodao.entity.UseRecordServerEntity" id="useRecordServerMap">
         <result property="uId" column="u_id"/>
         <result property="createTime" column="create_time"/>
         <result property="serverName" column="server_name"/>
@@ -13,8 +13,12 @@
         <result property="responseTime" column="response_time"/>
         <result property="throughput" column="throughput"/>
         <result property="queryRate" column="query_rate"/>
+        <result property="diskUse" column="disk_use"/>
         <result property="diskSpeed" column="disk_speed"/>
         <result property="bandwidth" column="bandwidth"/>
+        <result property="bandwinthDown" column="bandwinth_down"/>
+        <result property="processesNumber" column="processes_number"/>
+        <result property="warnType" column="warn_type"/>
     </resultMap>
 
 
