@@ -4,7 +4,7 @@
 <mapper namespace="cn.cnic.security.xiandao.dao.UseRecordServerDao">
 
     <!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="cn.cnic.security.xiaodao.entity.UseRecordServerEntity" id="useRecordServerMap">
+    <resultMap type="cn.cnic.security.xiandao.entity.UseRecordServerEntity" id="useRecordServerMap">
         <result property="uId" column="u_id"/>
         <result property="createTime" column="create_time"/>
         <result property="serverName" column="server_name"/>
@@ -21,5 +21,7 @@
         <result property="warnType" column="warn_type"/>
     </resultMap>
 
-
+    <select id="lastRecord" resultMap="useRecordServerMap">
+        SELECT * from use_record_server where u_id in (SELECT MAX(u_id) from use_record_server GROUP BY server_name)
+    </select>
 </mapper>

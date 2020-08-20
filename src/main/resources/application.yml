@@ -60,7 +60,7 @@ spring:
       content-typ: text/html
     prefix: classpath:/templates/
 mybatis-plus:
-  mapper-locations: classpath:mapper/*Mapper.xml
+  mapper-locations: classpath:mapper/*Dao.xml
   global-config:
     db-config:
       field-strategy: not_empty
@@ -69,5 +69,5 @@ mybatis-plus:
     banner: false
    # super-mapper-class: org.crown.framework.mapper.BaseMapper
   #type-enums-package: org.crown.enums
-  type-aliases-package: cn.cnic.xiandao.model
+  #type-aliases-package: cn.cnic.xiandao.model
 
