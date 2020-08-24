@@ -21,5 +21,7 @@
         <result property="warnType" column="warn_type"/>
     </resultMap>
 
-
+    <select id="lastRecord" >
+        SELECT * from use_record_server where u_id in (SELECT MAX(u_id) from use_record_server GROUP BY server_name)
+    </select>
 </mapper>
