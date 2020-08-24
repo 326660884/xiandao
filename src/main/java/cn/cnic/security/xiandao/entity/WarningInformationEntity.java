@@ -1,5 +1,6 @@
 package cn.cnic.security.xiandao.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
@@ -33,6 +34,7 @@ public class WarningInformationEntity implements Serializable {
 	 */
 	private String warnDetails;
 
+	@TableField(exist = false)
 	private Integer total;
 
 }
