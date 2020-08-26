@@ -1,7 +1,11 @@
 package cn.cnic.security.xiandao.service.impl;
 
-import cn.cnic.security.xiandao.common.utils.Constant;
+import cn.cnic.security.xiandao.dao.ServerInfoDao;
+import cn.cnic.security.xiandao.entity.ServerInfoEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.Map;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -17,6 +21,10 @@ import cn.cnic.security.xiandao.service.UseRecordServerService;
 @Service("useRecordServerService")
 public class UseRecordServerServiceImpl extends ServiceImpl<UseRecordServerDao, UseRecordServerEntity> implements UseRecordServerService {
 
+    @Autowired
+    private ServerInfoDao serverInfoDao;
+
+
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         //判断是否警告
@@ -25,10 +33,10 @@ public class UseRecordServerServiceImpl extends ServiceImpl<UseRecordServerDao, 
         if( warn != null &&  Integer.parseInt(warn.toString()) == 1){
             qw.isNotNull("warn_type");
         }
-        IPage<UseRecordServerEntity> page = this.page(
+
+        IPage<UseRecordServerEntity> page = this.baseMapper.selectPageByTopic(
                 new Query<UseRecordServerEntity>().getPage(params,"u_id",false),
-                qw
-        );
+                qw);
 
         return new PageUtils(page);
     }

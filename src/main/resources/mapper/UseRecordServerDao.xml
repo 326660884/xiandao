@@ -19,10 +19,39 @@
         <result property="bandwinthDown" column="bandwinth_down"/>
         <result property="processesNumber" column="processes_number"/>
         <result property="warnType" column="warn_type"/>
+        <result property="topic" column="topic" />
     </resultMap>
 
 
-    <select id="lastRecord" resultMap="useRecordServerMap">
-        SELECT * from use_record_server where u_id in (SELECT MAX(u_id) from use_record_server GROUP BY server_name)
+    <select id="lastRecord" resultMap="useRecordServerMap" >
+        SELECT
+        u.*,
+        s.topic
+        FROM
+            use_record_server u
+        LEFT JOIN server_info s ON u.server_name = s.server_ip
+        WHERE
+            u.u_id IN ( SELECT MAX( u_id ) FROM use_record_server GROUP BY server_name )
     </select>
+
+    <select id="selectPageByTopic" resultMap="useRecordServerMap" >
+        SELECT
+            u.*,
+            s.topic
+        FROM
+            (SELECT * FROM use_record_server ${ew.customSqlSegment} ) u
+        LEFT JOIN server_info s ON u.server_name = s.server_ip
+    </select>
+
+    <select id="groupByTopic" resultType="java.util.HashMap">
+        SELECT
+            topic,
+            COUNT( CASE WHEN ( u.warn_type IS NOT NULL ) THEN 0 ELSE 1 END ) count
+        FROM
+            server_info s
+        LEFT JOIN use_record_server u ON s.server_ip = u.server_name
+        GROUP BY
+            topic
+    </select>
+
 </mapper>

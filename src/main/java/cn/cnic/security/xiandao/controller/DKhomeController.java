@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.beans.IntrospectionException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,7 +26,7 @@ public class DKhomeController {
 
     @GetMapping("overall")
     public R overall(){
-        Map<String, Integer> map = homeService.overall();
+        Map<String, Integer> map = this.homeService.overall();
         R r = R.ok();
         r.putAll(map);
         return r;
@@ -52,6 +53,13 @@ public class DKhomeController {
         Map<String, Integer> map = homeService.wranTypeNum();
 
         return R.ok().put("data",map);
+    }
+
+    @GetMapping("wranTopicNum")
+    public R wranTopicNum(){
+        List<Map<String, Object>> maps = homeService.topicByWarn();
+        return R.ok().put("data",maps);
+
     }
 
 }

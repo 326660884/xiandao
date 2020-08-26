@@ -1,8 +1,10 @@
 package cn.cnic.security.xiandao.service.impl;
 
+import cn.cnic.security.xiandao.common.utils.Query;
 import cn.cnic.security.xiandao.dao.UseRecordServerDao;
 import cn.cnic.security.xiandao.entity.UseRecordServerEntity;
 import cn.cnic.security.xiandao.entity.WarningInformationEntity;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -111,6 +113,13 @@ public class HomeService {
             }
         }
         return map;
+    }
+
+    /**
+     * 课题的告警数量
+     */
+    public  List<Map<String, Object>> topicByWarn(){
+        return useRecordServerDao.groupByTopic(new QueryWrapper<>());
     }
 
 }

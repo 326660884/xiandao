@@ -1,5 +1,6 @@
 package cn.cnic.security.xiandao.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
@@ -75,5 +76,8 @@ public class UseRecordServerEntity implements Serializable {
      * 预警类型
      */
     private String warnType;
+
+    @TableField(exist = false)
+    private String topic;
 
 }
